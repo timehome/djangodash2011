@@ -10,9 +10,9 @@
     }
 
     albumsRequest: {
-        username = /(?:.+?)\/(.+)/.exec(window.location)[0];
+        var username = /(?:.+?)\/(.+)/.exec(window.location)[0];
         var request = new Request.JSON({
-            url: '/' + username + '.json'
+            url: '/'+ username +'.json'
         });
     }
 
