@@ -10,7 +10,15 @@
     }
 
     albumsRequest: {
-        var username = window.location.href.match(/\/([^/]+)$/)[1];
+        var username = "";
+        username = window.location.href.match(/\/([^/]+)$/);
+        if (username){
+            username = username[1];
+        } else if (global.auth_username) {
+            username = global.auth_username;
+        } else {
+            username = global.default_username;
+        }
         var request = new Request.JSON({
             url: '/api/'+ username +'.json'
         });

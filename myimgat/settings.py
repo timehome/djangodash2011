@@ -158,7 +158,7 @@ SHORTEN_MODELS = {
 # end of django-shorturl app settings
 
 # wall app settings
-DEFAULT_USER_WALL = 'rafael.jacinto'
+DEFAULT_USER_WALL = 'heynemann'
 # end of wall settings
 
 # django-nose app settings

@@ -7,6 +7,9 @@
         {% endif %}
     {% endfor %}
     {% if user.is_authenticated %}
+        <script>
+            var auth_username = "{{ username }}";
+        </script>
         <a class="selected" href="/logout/">logout</a>
     {% else %}
         <a class="selected" href="{% url socialauth_begin "google" %}">login</a>
