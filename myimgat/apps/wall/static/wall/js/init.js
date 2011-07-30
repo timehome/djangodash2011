@@ -75,12 +75,17 @@
 
     request.get();
 
-    popin: {
-        var popin = new Popin('popin');
-        popin.show('welcome');
+    overlay: {
+        var overlay = new Overlay();
     }
 
-
+    popin: {
+        if (!settings.authUsername) {
+            var popin = new Popin('simple-popin');
+            overlay.block().show();
+            popin.show('login');
+        }
+    }
 
 }(this, document.id));
 
