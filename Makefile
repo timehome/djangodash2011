@@ -25,6 +25,6 @@ test:
 	@env PYTHONPATH=. python myimgat/manage.py test
 
 jstest:
-	jasmine-splinter `pwd`/jstests/index.html
+	@jasmine-splinter `pwd`/jstests/index.html
 
 
