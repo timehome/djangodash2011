@@ -8,8 +8,7 @@ from myimgat.providers.google import GoogleImageProvider
 def index(request):
     provider = GoogleImageProvider('heynemann')
     albums = provider.load_albums()
-    for album in albums:
-        provider.load_photos(album)
+    provider.load_photos(albums[2])
     return render(request, 'wall/index.html', {
         'albums': albums
     })
