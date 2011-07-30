@@ -3,8 +3,8 @@ all: run
 run:
 	@cd myimgat/ && python manage.py runserver
 
-update_deps:
-	@pip freeze | grep -v "git-remote-helpers" | grep -v "^nose" | grep -v "rdflib" | grep -v "termcolor" | grep -v "lxml" | grep -v "selenium" | grep -v "splinter" | grep -v "coverage" | grep -v "distribute" > myimgat/requirements/project.txt
+update_deps: update_test_deps
+	@pip freeze | grep -v "git-remote-helpers" | grep -v "^nose" | grep -v "argparse" | grep -v "rdflib" | grep -v "termcolor" | grep -v "lxml" | grep -v "selenium" | grep -v "splinter" | grep -v "coverage" | grep -v "distribute" > myimgat/requirements/project.txt
 
 update_test_deps:
 	@pip freeze | grep -v "git-remote-helpers" > myimgat/requirements/test.txt
