@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
+
 class ImageProvider(object):
     def __init__(self, username, thumb_size=(128, 128)):
         self.username = username
         self.thumb_size = thumb_size
+        self.thumbor_server = settings.THUMBOR_SERVER
 
     def load_albums(self):
         raise NotImplementedError()

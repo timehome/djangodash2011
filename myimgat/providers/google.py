@@ -1,13 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from os.path import join
+
 import gdata.photos.service
 import gdata.media
 import gdata.geo
 from libthumbor import CryptoURL
 
 from myimgat.providers.base import ImageProvider, Album, Photo
-
 
 class GoogleImageProvider(ImageProvider):
     def load_albums(self):
@@ -17,7 +18,7 @@ class GoogleImageProvider(ImageProvider):
         for album in albums.entry:
             parsed_album = Album(identifier=album.gphoto_id.text, url=album.id.text, title=album.title.text)
             parsed_albums.append(parsed_album)
- 
+
         return parsed_albums
 
     def load_photos(self, album):
@@ -34,5 +35,5 @@ class GoogleImageProvider(ImageProvider):
                 smart=True,
                 image_url=url
             )
-            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=thumb))
-            
+            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(self.thumbor_server.rstrip('/'), thumb.lstrip('/'))))
+

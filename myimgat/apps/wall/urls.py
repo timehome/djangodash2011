@@ -1,6 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from django.conf.urls.defaults import patterns, url
-from django.views.generic.simple import direct_to_template
+from myimgat.apps.wall.views import index
 
 urlpatterns = patterns('',
-    url('^$', direct_to_template, {'template': 'wall/index.html'}),
+    url('^$', index),
 )
