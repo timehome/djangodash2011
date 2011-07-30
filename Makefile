@@ -14,3 +14,6 @@ db:
 
 deploy:
 	@cd myimgat/ && gondor deploy primary master
+
+test:
+	@env PYTHONPATH=. nosetests -
