@@ -1,4 +1,13 @@
 <div id="simple-popin" class="simple-popin popin">
+    
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    
     <div class="login">
         <p>Show, see, crop and share your photos easily!</p>
         <p>Choose your log-in option:</p>
