@@ -6,6 +6,7 @@
         <a class="selected" href="#{{ album.identifier }}" title="{{ album.title }}">{{ album.title }}</a>
         {% endif %}
     {% endfor %}
+    <a href="{% url socialauth_begin "google" %}">login</a>
 {% endblock %}
 
 {% block content %}

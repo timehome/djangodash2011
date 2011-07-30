@@ -8,7 +8,12 @@ from myimgat.providers.google import GoogleImageProvider
 
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "rafael.jacinto")
 
-def index(request, username=DEFAULT_USER_WALL):
+def index(request, username=None):
+    if not username:
+        if not request.user.is_authenticated():
+            username = DEFAULT_USER_WALL
+        else:
+            username = request.user.email.split('@')[0]
     provider = GoogleImageProvider(username)
     albums = provider.load_albums()
     for album in albums:
