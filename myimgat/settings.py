@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Django settings for myimgat project.
 import sys
 from os.path import join, dirname, abspath
@@ -142,6 +145,12 @@ INSTALLED_APPS = (
     # external apps
     'social_auth',
 )
+
+# provider settings
+
+DEFAULT_THUMB_SIZE = (128, 128)
+
+# end provider app settings
 
 # social_auth specific configs
 
