@@ -25,9 +25,11 @@
         <header id="header">
             <h1>myimg.at</h1>
             <nav>
-                <a class="selected" href="#" title="Album1">album1</a>
-                <a href="#" title="Album2">album2</a>
-                <a href="#" title="Album3">album3</a>
+                {% for album in albums %}
+                    {% if album.photos %}
+                    <a class="selected" href="#{{ album.identifier }}" title="Album1">{{ album.title }}</a>
+                    {% endif %}
+                {% endfor %}
             </nav>
         </header>
         {% endblock %}
