@@ -1,2 +1,11 @@
-TIMEHOME rocks!!!
-================
+TIMEHOME @ djangodash2011
+=========================
+
+Photos application...
+
+Members
+-------
+
+ - Bernardo Heynemann
+ - Fabio M. Costa
+ - Rafael Caricio
