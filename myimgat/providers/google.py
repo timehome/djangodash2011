@@ -34,11 +34,12 @@ class GoogleImageProvider(ImageProvider):
                 self.username, album.identifier))
         for photo in photos.entry:
             url = photo.content.src
-            thumb = crypto.generate(
-                width=self.thumb_size[0],
-                height=self.thumb_size[1],
-                smart=True,
-                image_url=url
-            )
+            thumb = '/unsafe/%dx%d/smart/%s' % (self.thumb_size[0], self.thumb_size[1], url)
+            #thumb = crypto.generate(
+                #width=self.thumb_size[0],
+                #height=self.thumb_size[1],
+                #smart=True,
+                #image_url=url
+            #)
             server = '%d' in self.thumbor_server and self.thumbor_server % random.choice([1,2,3]) or self.thumbor_server
             album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(server.rstrip('/'), thumb.lstrip('/'))))

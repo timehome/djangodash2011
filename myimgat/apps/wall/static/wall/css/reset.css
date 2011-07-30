@@ -3,5 +3,6 @@ html, body, h1, h2 {
     margin: 0;
 }
 body {
+    background: #ddd;
     font-family: arial,helvetica,freesans,sans-serif;
 }
