@@ -10,10 +10,6 @@ from myimgat.providers.base import ImageProvider, Album, Photo
 
 
 class GoogleImageProvider(ImageProvider):
-    def __init__(self, username, thumb_size=(128, 128)):
-        self.username = username
-        self.thumb_size = thumb_size
-
     def load_albums(self):
         parsed_albums = []
         gd_client = gdata.photos.service.PhotosService()
