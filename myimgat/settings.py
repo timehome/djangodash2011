@@ -141,6 +141,7 @@ INSTALLED_APPS = (
 
     # project specific apps
     'wall',
+    'providers',
 
     # external apps
     'social_auth',
