@@ -4,34 +4,38 @@
     {% block css %}
     <link href="{{ STATIC_URL }}wall/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}wall/css/popin.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/wall.css" rel="stylesheet" type="text/css" />
     {% endblock %}
 {% endblock %}
 
 {% block body %}
-        {% block menu %}
-        <header id="header">
-            <h1>myimg.at</h1>
-            <nav>
-                {% block navigation %}
-                {% endblock %}
-            </nav>
-        </header>
-        {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+    {% block menu %}
+    <header id="header">
+        <h1>myimg.at</h1>
+        <nav>
+            {% block navigation %}
+            {% endblock %}
+        </nav>
+    </header>
+    {% endblock %}
 
-        {% block js %}
-        <script>
-            var default_username = "{{ username }}";
-        </script>
-        <script src="{{ STATIC_URL }}wall/js/mootools-core-1.3.2-compat.js"></script>
-        <script src="{{ STATIC_URL }}wall/js/mootools-more-1.3.2.1.js"></script>
-        <script src="{{ STATIC_URL }}wall/js/pubsub.js"></script>
-        <script src="{{ STATIC_URL }}wall/js/header.js"></script>
-        <script src="{{ STATIC_URL }}wall/js/wall.js"></script>
-        <script src="{{ STATIC_URL }}wall/js/init.js"></script>
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
+
+    {% include "wall/popin.html" %}
+
+    {% block js %}
+    <script>
+        var default_username = "{{ username }}";
+    </script>
+    <script src="{{ STATIC_URL }}wall/js/mootools-core-1.3.2-compat.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/mootools-more-1.3.2.1.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/pubsub.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/header.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/wall.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/init.js"></script>
+    {% endblock %}
 
 {% endblock %}
