@@ -22,7 +22,7 @@ db:
 	@cd myimgat/ && python manage.py syncdb
 
 deploy:
-	@cd myimgat/ && gondor deploy primary master
+	@cd myimgat/ && gondor deploy prod master
 
 test:
 	@env PYTHONPATH=. python myimgat/manage.py test
