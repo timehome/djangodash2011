@@ -15,8 +15,12 @@
     {% block menu %}
     <header id="header">
         <h1>myimg.at</h1>
-        <nav>
-            {% block navigation %}
+        <nav class="albums">
+            {% block albums_navigation %}
+            {% endblock %}
+        </nav>
+        <nav class="user">
+            {% block user_navigation %}
             {% endblock %}
         </nav>
     </header>
@@ -39,6 +43,7 @@
     <script src="{{ STATIC_URL }}wall/js/header.js"></script>
     <script src="{{ STATIC_URL }}wall/js/overlay.js"></script>
     <script src="{{ STATIC_URL }}wall/js/popin.js"></script>
+    <script src="{{ STATIC_URL }}wall/js/crop-popin.js"></script>
     <script src="{{ STATIC_URL }}wall/js/init.js"></script>
     {% endblock %}
 

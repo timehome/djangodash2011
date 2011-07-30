@@ -17,7 +17,7 @@
         } else if (global.settings.authUsername) {
             username = global.settings.authUsername;
         } else {
-            username = global.defaultUsername;
+            username = global.settings.defaultUsername;
         }
         var request = new Request.JSON({
             url: '/api/'+ username +'.json'

@@ -1,19 +1,21 @@
 {% extends "wall/base.html" %}
 
-{% block navigation %}
+{% block albums_navigation %}
     {% for album in albums %}
         {% if album.photos %}
         <a class="selected" href="#{{ album.identifier }}" title="{{ album.title }}">{{ album.title }}</a>
         {% endif %}
     {% endfor %}
+{% endblock %}
+
+{% block user_navigation %}
     {% if user.is_authenticated %}
-        <script>
-            settings = this.settings || {};
-            settings.authUsername = "{{ username }}";
-        </script>
-        <a class="selected" href="/logout/">logout</a>
-    {% else %}
-        <a class="selected" href="{% url socialauth_begin "google" %}">login</a>
+    <script>
+        settings = this.settings || {};
+        settings.authUsername = "{{ username }}";
+    </script>
+    <span>{{ username }}</span>
+    <a href="/logout/">logout</a>
     {% endif %}
 {% endblock %}
 
