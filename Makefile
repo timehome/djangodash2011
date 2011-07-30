@@ -7,10 +7,10 @@ run:
 	@cd myimgat/ && python manage.py runserver
 
 update_deps: update_test_deps
-	@pip freeze | grep -v "git-remote-helpers" | grep -v "^nose" | grep -v "argparse" | grep -v "rdflib" | grep -v "termcolor" | grep -v "lxml" | grep -v "selenium" | grep -v "splinter" | grep -v "coverage" | grep -v "distribute" > ${REQ_PATH}
+	@pip freeze | grep -v "git-remote-helpers" | grep -v "^nose" | grep -v "rdflib" | grep -v "termcolor" | grep -v "lxml" | grep -v "selenium" | grep -v "splinter" | grep -v "coverage" | grep -v "distribute" > ${REQ_PATH}
 
 update_test_deps:
-	@pip freeze | grep -v "git-remote-helpers" | grep -v "argparse" > ${TESTS_REQ_PATH}
+	@pip freeze | grep -v "git-remote-helpers" > ${TESTS_REQ_PATH}
 
 setup_dev:
 	@pip install -r ${TESTS_REQ_PATH}
