@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Django settings for myimgat project.
 import sys
 from os.path import join, dirname, abspath
@@ -135,12 +138,49 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
+    # project specific apps
     'wall',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'providers',
+
+    # external apps
+    'social_auth',
 )
+
+# provider settings
+
+DEFAULT_THUMB_SIZE = (128, 128)
+
+# end provider app settings
+
+# social_auth specific configs
+
+AUTHENTICATION_BACKENDS = (
+    #'social_auth.backends.twitter.TwitterBackend',
+    #'social_auth.backends.facebook.FacebookBackend',
+    #'social_auth.backends.google.GoogleOAuthBackend',
+    #'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    #'social_auth.backends.yahoo.YahooBackend',
+    #'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    #'social_auth.backends.contrib.LiveJournalBackend',
+    #'social_auth.backends.contrib.orkut.OrkutBackend',
+    #'social_auth.backends.contrib.orkut.FoursquareBackend',
+    #'social_auth.backends.OpenIDBackend',
+    #'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = '/login'
+
+from django.template.defaultfilters import slugify
+SOCIAL_AUTH_USERNAME_FIXER = lambda u: slugify(u)
+
+SOCIAL_AUTH_UUID_LENGTH = 16
+SOCIAL_AUTH_EXTRA_DATA = True
+SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
+
+# end of social_auth specifc config
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -165,7 +205,12 @@ LOGGING = {
     }
 }
 
+THUMBOR_SECURITY_KEY = 'rivendell_rox'
+THUMBOR_SERVER = 'http://thby.nl'
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
+

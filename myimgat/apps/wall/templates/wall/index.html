@@ -3,24 +3,11 @@
 
 {% block content %}
 <div id="wall" class="wall">
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
-    <img src="http://thby.nl/unsafe/200x100/top/http://images.recados.net/img/recados/modelos_939541358_modelos008.jpg" alt="" />
+    {% for album in albums %}
+        <h1><a href="{{ album.url }}">{{ album.title }}</a></h1>
+        {% for photo in album.photos %}
+        <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" title="{{ photo.title }}" /></span>
+        {% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}

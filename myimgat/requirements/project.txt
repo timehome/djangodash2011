@@ -1,7 +1,11 @@
 Django==1.3
 argparse==1.1
-distribute==0.6.15
+django-social-auth==0.4.2
 gondor==1.0b1.post10
+httplib2==0.7.1
 libthumbor==0.5.0
+oauth2==1.5.170
 pycrypto==2.3
+python-openid==2.2.5
 wsgiref==0.1.2
+gdata
