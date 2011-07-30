@@ -197,6 +197,7 @@ SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
 
 FACEBOOK_APP_ID = '211101618942268'
 FACEBOOK_API_SECRET = 'c462511f5ca9feb2aa193f15ccd2f1b1'
+FACEBOOK_EXTENDED_PERMISSIONS = ['publish_stream', 'user_photos', 'user_status', 'read_friendlists']
 
 # end of social_auth specifc config
 
