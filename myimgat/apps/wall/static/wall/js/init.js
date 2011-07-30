@@ -82,7 +82,6 @@
     popin: {
         if (!settings.authUsername) {
             var popin = new Popin('simple-popin');
-            overlay.block().show();
             popin.show('login');
         }
     }

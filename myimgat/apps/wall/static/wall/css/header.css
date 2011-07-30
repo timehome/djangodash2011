@@ -50,6 +50,11 @@ nav * {
 
     -webkit-transition: border-width 120ms linear;
 }
+
+nav span {
+    cursor: default;
+}
+
 nav a:hover {
     border-bottom: 2px solid #fff;
 }
