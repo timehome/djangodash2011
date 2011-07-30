@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 from myimgat.providers.google import GoogleImageProvider
 
@@ -63,10 +64,19 @@ class Photo(models.Model):
     height = models.IntegerField(blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse("photo_url", kwargs={'photo_id': self.id})
+        return reverse("photo_url", kwargs={'object_id': self.id})
 
 class PhotoProxy(Photo):
     objects = PhotoManager()
 
     class Meta:
         proxy = True
+
+class CroppedPhoto(models.Model):
+    original_photo = models.ForeignKey(Photo, related_name='crops')
+    user = models.ForeignKey(User, blank=True, null=True, related_name='cropped_photos')
+    url = models.CharField(max_length=500, db_index=True)
+
+    def get_absolute_url(self):
+        return reverse("cropped_photo_url", kwargs={'object_id': self.id})
+

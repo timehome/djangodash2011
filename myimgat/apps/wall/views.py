@@ -5,11 +5,9 @@ from json import dumps
 
 from django.conf import settings
 from django.shortcuts import render
-from django.template.response import TemplateResponse
-from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 
-from models import AlbumProxy, PhotoProxy, Photo
+from models import AlbumProxy, PhotoProxy
 
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
 
@@ -55,7 +53,3 @@ def albums(request, username=None, extension="json"):
         return HttpResponse('albums_loaded(%s)' % data, mimetype="application/json")
     else:
         raise Http404
-
-def show_photo(request, photo_id):
-    return TemplateResponse(request, 'wall/photo.html', 
-            {"photo": get_object_or_404(Photo, id=photo_id) })

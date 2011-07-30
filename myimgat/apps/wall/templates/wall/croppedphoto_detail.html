@@ -1,0 +1,23 @@
+{% extends "wall/base.html" %}
+
+{% load shorturl %}
+{% load thumbor_tags %}
+
+{% block extra_head %}
+<meta property="og:title" content="{{ photo.title }} at MyImg.at"/>
+<meta property="og:type" content="article:activity"/>
+<meta property="og:url" content="{% shorturl photo %}"/>
+<meta property="og:image" content="{% thumbor_url_unsafe photo.url "smart/50x50" %}"/>
+<meta property="og:site_name" content="MyImg.at"/>
+<meta property="fb:app_id" content="211101618942268"/>
+<meta property="og:description" content="Crop and share your photos anyware."/>
+{% endblock %}
+
+{% block content %}
+<h2>{{ photo.original_photo.title }}</h2>
+<img src="{{ photo.url }}" />
+<a href="/{{ photo.album.username }}">Go to {{ photo.original_photo.album.username }} wall</a>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

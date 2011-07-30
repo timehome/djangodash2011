@@ -6,7 +6,7 @@ from django import template
 from django.template import Context
 from django.conf import settings
 
-from wall.models import Photo, Album
+from wall.models import Photo, Album, CroppedPhoto
 
 class WallViewTest(TestCase):
     def test_access_the_index(self):
@@ -48,6 +48,35 @@ class PhotoAbsoluteUrlsAndViews(TestCase):
 
     def test_url_absolute_url_exists(self):
         url = self.photo.get_absolute_url()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+class CroppedPhotoAbsoluteUrlsAndViews(TestCase):
+
+    def setUp(self):
+        self.photo = Photo.objects.create(title="My photo.",
+            url = "http://balbalabla",
+            thumbnail = "http://hauhaiua",
+            album = Album.objects.create(username="rafaelcaricio", identifier="boaboa"),
+            width = 128,
+            height = 128
+        )
+
+        self.cropped_photo = CroppedPhoto.objects.create(
+            original_photo = self.photo,
+            url = 'http://thby.nl/xxx',
+        )
+
+    def test_accessing_photo_directly_urls(self):
+        response = self.client.get('/shared_photo/0')
+        self.assertEqual(response.status_code, 404)
+
+    def test_gerating_photo_absolute_url(self):
+        url = self.cropped_photo.get_absolute_url()
+        self.assertEqual(url, "/shared_photo/1")
+
+    def test_url_absolute_url_exists(self):
+        url = self.cropped_photo.get_absolute_url()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
