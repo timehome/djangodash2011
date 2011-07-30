@@ -7,7 +7,7 @@ from django.views.generic.simple import redirect_to
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', include('wall.urls')),
+    url(r'', include('wall.urls')),
     url(r'', include('social_auth.urls')),
     url('^favicon.ico$', redirect_to, {'url': '%s/favicon.ico' % settings.STATIC_URL}),
 

@@ -1,7 +1,7 @@
 REQ_PATH = myimgat/requirements/project.txt
 TESTS_REQ_PATH = tests/requirements.txt
 
-all: run
+all: test jstest
 
 run:
 	@cd myimgat/ && python manage.py runserver

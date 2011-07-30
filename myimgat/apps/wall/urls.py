@@ -6,4 +6,5 @@ from myimgat.apps.wall.views import index
 
 urlpatterns = patterns('',
     url('^$', index),
+    url('(?P<username>[\w.]+)/?$', index),
 )

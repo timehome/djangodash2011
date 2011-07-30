@@ -3,8 +3,7 @@
 
 from django.test import TestCase
 
-
 class WallViewTest(TestCase):
     def test_access_the_specific_user_wall(self):
-        response = self.client.get('/bernardo')
+        response = self.client.get('/rafael.jacinto')
         self.assertEqual(response.status_code, 200)
