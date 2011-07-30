@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% load thumbor_tags %}
-
-{% block body %}
-<h2>{{ photo.title }}</h2>
-<img src="{% thumbor_url_unsafe photo.url "fit-in/600x500" %}" />
-<a href="/{{ photo.album.username }}">Go to {{ photo.album.username }} wall</a>
-{% endblock %}
