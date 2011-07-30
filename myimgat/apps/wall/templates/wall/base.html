@@ -1,26 +1,14 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>myimg.at</title>
-        <meta http-equiv="ETag" content="" />
-        <meta name="robots" content="All" />
-        <meta name="author" content="timehome@djangodash" />
-        <meta name="description" content="Your own wall of pictures" />
-        <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" />
+{% extends "base.html" %}
 
-        {% block css %}
-        <link href="{{ STATIC_URL }}wall/css/reset.css" rel="stylesheet" type="text/css" />
-        <link href="{{ STATIC_URL }}wall/css/header.css" rel="stylesheet" type="text/css" />
-        <link href="{{ STATIC_URL }}wall/css/wall.css" rel="stylesheet" type="text/css" />
-        {% endblock %}
+{% block head %}
+    {% block css %}
+    <link href="{{ STATIC_URL }}wall/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}wall/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}wall/css/wall.css" rel="stylesheet" type="text/css" />
+    {% endblock %}
+{% endblock %}
 
-        <link href="http://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet" type="text/css" />
-        <!--[if lt IE 9]>
-            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    </head>
-    <body>
+{% block body %}
         {% block menu %}
         <header id="header">
             <h1>myimg.at</h1>
@@ -41,6 +29,4 @@
         <script src="{{ STATIC_URL }}wall/js/init.js"></script>
         {% endblock %}
 
-    </body>
-</html>
-
+{% endblock %}
