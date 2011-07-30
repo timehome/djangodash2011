@@ -5,7 +5,7 @@ from json import dumps
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 from models import AlbumProxy, PhotoProxy
 

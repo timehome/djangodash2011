@@ -21,10 +21,13 @@ class GoogleImageProvider(ImageProvider):
     def load_albums(self):
         parsed_albums = []
         gd_client = gdata.photos.service.PhotosService()
-        albums = gd_client.GetUserFeed(user=self.username)
-        for album in albums.entry:
-            parsed_album = Album(identifier=album.gphoto_id.text, url=album.id.text, title=album.title.text)
-            parsed_albums.append(parsed_album)
+        try:
+            albums = gd_client.GetUserFeed(user=self.username)
+            for album in albums.entry:
+                parsed_album = Album(identifier=album.gphoto_id.text, url=album.id.text, title=album.title.text)
+                parsed_albums.append(parsed_album)
+        except gdata.photos.service.GooglePhotosException:
+            return None
 
         return parsed_albums
 

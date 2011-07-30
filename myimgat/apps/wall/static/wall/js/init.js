@@ -10,9 +10,9 @@
     }
 
     albumsRequest: {
-        username = /(?:.+?)\/(.+)/.exec(window.location)[0];
+        var username = /(?:.+?)\/(.+)/.exec(window.location)[0];
         var request = new Request.JSON({
-            url: '/' + username + '.json'
+            url: '/'+ username +'.json'
         });
     }
 
@@ -23,9 +23,7 @@
 
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
-                // adicionar item no menu
-                navigation.grab(new Element('a', {html: albums[i].title}));
-                // adicionar imagens na wall
+                navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
                 images.push.apply(images, albums[i].photos);
             };
 
@@ -38,23 +36,29 @@
                 rangex: [-images.length, images.length],
                 rangey: [-images.length, images.length],
                 callOnUpdate: function(items){
-                    items.each(function(e, i){
+                    for (var i = 0, l = items.length; i < l; i++) {
+                        var placeholder = items[i].node;
+
                         var img = new Element('img');
                         img.addEvent('load', function(){
-                            img.inject(e.node).fade('in');
-                        });
+                            this.addClass('success');
+                        }.bind(placeholder));
                         img.addEvent('error', function(){
-                            e.node.grab(document.createTextNode(':( was not possible to load this image'));
-                            e.node.addClass('error');
+                            this.grab(document.createTextNode(':( was not possible to load this image'));
+                            this.addClass('error');
+                        }.bind(placeholder));
+                        img.addEvent('dblclick', function(){
+                            location.href = usernamer + '/photos/'+ images[counterFluid].url;
                         });
-                        img.set('src', images[counterFluid].thumbnail).fade('hide');
+                        img.set('src', images[counterFluid].thumbnail);
+                        placeholder.grab(img);
 
                         counterFluid++;
                         // Reset counter
                         if (counterFluid >= images.length) {
                             counterFluid = 0;
                         }
-                    });
+                    }
                 }
             });
             wall.initWall();

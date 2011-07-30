@@ -1,4 +1,4 @@
-.wall {
+.viewport {
     position: absolute;
     top: 46px;
     left: 0;
@@ -14,6 +14,10 @@
     background: none;
 }
 .wall img {
-    float: left;
+    opacity: 0;
+    -webkit-transition: opacity 300ms linear;
+}
+.wall .success img {
+    opacity: 1;
 }
 
