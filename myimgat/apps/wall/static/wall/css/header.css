@@ -5,16 +5,22 @@ header {
     top: 0;
     right: 0;
     padding: 8px;
-    background: rgba(0, 0, 0, 0.6);
+    background: #000;
+    box-shadow: 0 1px 4px #333;
 }
 header h1 {
     color: #6b21a9;
     font-family: 'Leckerli One', cursive;
     font-size: 28px;
     float: left;
-    text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff;
     padding-right: 20px;
     line-height: 22px;
+    cursor: default;
+    text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff;
+}
+header h1:hover {
+    text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff,
+        0 0 12px #fff;
 }
 nav {
     float: left;
@@ -25,7 +31,6 @@ nav a {
     float: left;
     text-decoration: none;
     margin-right: 4px;
-
 }
 nav a:hover {
 }
