@@ -4,10 +4,12 @@
 {% block content %}
 <div id="wall" class="wall">
     {% for album in albums %}
-        <h1><a href="{{ album.url }}">{{ album.title }}</a></h1>
-        {% for photo in album.photos %}
-        <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" title="{{ photo.title }}" /></span>
-        {% endfor %}
+        {% if album.photos %}
+            <h1><a href="{{ album.url }}">{{ album.title }}</a></h1>
+            {% for photo in album.photos %}
+            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" title="{{ photo.title }}" /></span>
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
