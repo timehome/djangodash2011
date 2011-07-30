@@ -3,6 +3,7 @@
 
 from os.path import join
 from django.conf import settings
+import random
 
 import gdata.photos.service
 import gdata.media
@@ -39,4 +40,5 @@ class GoogleImageProvider(ImageProvider):
                 smart=True,
                 image_url=url
             )
-            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(self.thumbor_server.rstrip('/'), thumb.lstrip('/'))))
+            server = '%d' in self.thumbor_server and self.thumbor_server % random.choice([1,2,3]) or self.thumbor_server
+            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(server.rstrip('/'), thumb.lstrip('/'))))
