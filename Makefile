@@ -4,7 +4,7 @@ run:
 	@cd myimgat/ && python manage.py runserver
 
 update_deps:
-	@pip freeze > myimgat/requirements/project.txt
+	@pip freeze | grep -v "git-remote-helpers" > myimgat/requirements/project.txt
 
 setup:
 	@pip install -r myimgat/requirements/project.txt
@@ -14,3 +14,6 @@ db:
 
 deploy:
 	@cd myimgat/ && gondor deploy primary master
+
+test:
+	@env PYTHONPATH=. nosetests -v -s --with-coverage --cover-erase --cover-package=myimgat --cover-inclusive tests/
