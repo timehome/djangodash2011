@@ -3,11 +3,14 @@
 
 from django.conf import settings
 
+DEFAULT_THUMB_SIZE = getattr(settings, "DEFAULT_THUMB_SIZE", (128, 128))
+THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://thby.nl'))
+
 class ImageProvider(object):
-    def __init__(self, username, thumb_size=(128, 128)):
+    def __init__(self, username, thumb_size=DEFAULT_THUMB_SIZE):
         self.username = username
         self.thumb_size = thumb_size
-        self.thumbor_server = settings.THUMBOR_SERVER
+        self.thumbor_server = THUMBOR_SERVER
 
     def load_albums(self):
         raise NotImplementedError()

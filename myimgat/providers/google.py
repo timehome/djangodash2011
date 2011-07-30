@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 
 from os.path import join
+from django.conf import settings
 
 import gdata.photos.service
 import gdata.media
 import gdata.geo
+
 from libthumbor import CryptoURL
 
 from myimgat.providers.base import ImageProvider, Album, Photo
+
+THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY', 'my-security-key')
 
 class GoogleImageProvider(ImageProvider):
     def load_albums(self):
@@ -22,7 +26,7 @@ class GoogleImageProvider(ImageProvider):
         return parsed_albums
 
     def load_photos(self, album):
-        crypto = CryptoURL(key='rivendell_rox')
+        crypto = CryptoURL(key=THUMBOR_SECURITY_KEY)
         gd_client = gdata.photos.service.PhotosService()
         photos = gd_client.GetFeed(
             '/data/feed/api/user/%s/albumid/%s?kind=photo' % (
@@ -36,4 +40,3 @@ class GoogleImageProvider(ImageProvider):
                 image_url=url
             )
             album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(self.thumbor_server.rstrip('/'), thumb.lstrip('/'))))
-
