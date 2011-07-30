@@ -23,7 +23,7 @@
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
                 // adicionar item no menu
-                navigation.grab(new Element('a', {html: albums[i].title}));
+                navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
                 // adicionar imagens na wall
                 images.push.apply(images, albums[i].photos);
             };
