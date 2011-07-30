@@ -5,5 +5,5 @@
 {% block body %}
 <h2>{{ photo.title }}</h2>
 <img src="{% thumbor_url_unsafe photo.url "fit-in/600x500" %}" />
-<a href="/{{ photo.album.username }}">{{ photo.album.username }} wall</a>
+<a href="/{{ photo.album.username }}">Go to {{ photo.album.username }} wall</a>
 {% endblock %}

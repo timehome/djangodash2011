@@ -27,7 +27,7 @@ class GoogleImageProvider(ImageProvider):
                 parsed_album = Album(identifier=album.gphoto_id.text, url=album.id.text, title=album.title.text)
                 parsed_albums.append(parsed_album)
         except gdata.photos.service.GooglePhotosException:
-            return None
+            return []
 
         return parsed_albums
 
