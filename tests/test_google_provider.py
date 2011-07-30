@@ -35,8 +35,7 @@ def test_albums_can_load_their_photos():
     albums = provider.load_albums()
 
     album = albums[1]
-    provider.load_photos(album=album)
+    assert provider.load_photos(album=album)
 
-    assert album.photos
 
 

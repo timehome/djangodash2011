@@ -123,6 +123,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'myimgat.urls'
 
+APPEND_SLASH = True
+
 TEMPLATE_DIRS = (
     join(PROJECT_ROOT, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -143,10 +145,17 @@ INSTALLED_APPS = (
     'wall',
 
     # external apps
+    'shorturls',
     'social_auth',
     'south',
     'django_nose',
 )
+
+# django-shorturls app settings
+SHORTEN_MODELS = {
+    'P': 'wall.photo',
+}
+# end of django-shorturl app settings
 
 # wall app settings
 DEFAULT_USER_WALL = 'rafael.jacinto'

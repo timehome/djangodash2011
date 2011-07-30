@@ -5,7 +5,7 @@ from json import dumps
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import Http404, HttpResponse, HttpResponseNotFound
 
 from models import AlbumProxy, PhotoProxy
 
@@ -49,6 +49,10 @@ def albums(request, username=None, extension="json"):
 
     if extension == "json":
         return HttpResponse(data, mimetype="application/json")
-    callback = 'callback' in request.GET and 'albums_loaded'
-    return HttpResponse('%s(%s)' % (callback, data), mimetype="application/json")
+    elif extension == "jsonp":
+        return HttpResponse('albums_loaded(%s)' % data, mimetype="application/json")
+    else:
+        raise Http404
 
+def show_photo(request, photo_id):
+    return HttpResponse("ok")

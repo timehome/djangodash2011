@@ -13,11 +13,18 @@ class WallViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_access_the_specific_user_wall_as_json(self):
-        response = self.client.get('/rafael.jacinto.json')
+        response = self.client.get('/api/rafael.jacinto.json')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.content.startswith("["))
 
     def test_access_the_specific_user_wall_as_jsonp_if_callback_present(self):
-        response = self.client.get('/rafael.jacinto.jsonp?callback=True')
+        response = self.client.get('/api/rafael.jacinto.jsonp')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.content.startswith("albums_loaded(["))
+
+class TestShortUrlsForPhotos(TestCase):
+
+    def test_accessing_photo_directly_urls(self):
+        response = self.client.get('/photo/0')
+        self.assertEqual(response.status_code, 200)
+

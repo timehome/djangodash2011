@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from myimgat.providers.google import GoogleImageProvider
 
@@ -60,6 +61,9 @@ class Photo(models.Model):
     album = models.ForeignKey(Album, related_name="photos")
     width = models.IntegerField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("photo_url", kwargs={'photo_url': self.id})
 
 class PhotoProxy(Photo):
     objects = PhotoManager()
