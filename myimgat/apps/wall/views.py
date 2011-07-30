@@ -54,6 +54,6 @@ def albums(request, username=None, extension="json"):
 
     if extension == "json":
         return HttpResponse(data, mimetype="application/json")
-    callback = 'callback' in request.GET and 'albums_loaded'
+    callback = 'callback' in request.GET and request.GET['callback'] or 'albums_loaded'
     return HttpResponse('%s(%s)' % (callback, data), mimetype="application/json")
 
