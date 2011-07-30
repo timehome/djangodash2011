@@ -7,6 +7,11 @@ header {
     padding: 8px;
     background: #141414;
     box-shadow: 0 1px 4px #333;
+
+    -webkit-transition: background 160ms linear;
+}
+header.scrolling {
+    background: rgba(20, 20, 20, 0.8);
 }
 header h1 {
     color: #6b21a9;
