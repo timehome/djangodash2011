@@ -28,7 +28,9 @@ class Album(object):
 
 
 class Photo(object):
-    def __init__(self, url, title, thumbnail):
+    def __init__(self, url, title, thumbnail, width, height):
         self.url = url
         self.title = title
         self.thumbnail = thumbnail
+        self.width = width
+        self.height = height
