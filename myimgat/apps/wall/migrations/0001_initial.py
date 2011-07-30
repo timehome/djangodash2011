@@ -7,7 +7,13 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
+        # Deleting model 'Album'
+        db.delete_table('wall_album')
+
+        # Deleting model 'Photo'
+        db.delete_table('wall_photo')
+
         # Adding model 'Album'
         db.create_table('wall_album', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -29,7 +35,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        
+
         # Deleting model 'Album'
         db.delete_table('wall_album')
 
