@@ -206,7 +206,12 @@ LOGGING = {
     }
 }
 
+THUMBOR_SECURITY_KEY = 'rivendell_rox'
+THUMBOR_SERVER = 'http://thby.nl'
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
+

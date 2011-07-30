@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from os.path import join
 from django.conf import settings
 
 import gdata.photos.service
@@ -38,4 +39,4 @@ class GoogleImageProvider(ImageProvider):
                 smart=True,
                 image_url=url
             )
-            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=thumb))
+            album.photos.append(Photo(url=url, title=photo.title.text, thumbnail=join(self.thumbor_server.rstrip('/'), thumb.lstrip('/'))))
