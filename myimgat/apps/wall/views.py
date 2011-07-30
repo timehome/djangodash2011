@@ -31,7 +31,7 @@ def albums(request, username=None, extension="json"):
     provider = GoogleImageProvider(username)
     albums = provider.load_albums()
     for album in albums:
-        provider.load_photos(albums[5])
+        provider.load_photos(album)
 
     data = []
     for album in albums:
