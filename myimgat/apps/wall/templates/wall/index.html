@@ -6,7 +6,11 @@
         <a class="selected" href="#{{ album.identifier }}" title="{{ album.title }}">{{ album.title }}</a>
         {% endif %}
     {% endfor %}
-    <a class="selected" href="{% url socialauth_begin "google" %}">login</a>
+    {% if user.is_authenticated %}
+        <a class="selected" href="/logout/">logout</a>
+    {% else %}
+        <a class="selected" href="{% url socialauth_begin "google" %}">login</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
