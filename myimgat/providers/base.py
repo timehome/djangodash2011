@@ -4,7 +4,7 @@
 from django.conf import settings
 
 DEFAULT_THUMB_SIZE = getattr(settings, "DEFAULT_THUMB_SIZE", (128, 128))
-THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://thby.nl')
+THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://%d.thby.nl')
 
 class ImageProvider(object):
     def __init__(self, username, thumb_size=DEFAULT_THUMB_SIZE):
