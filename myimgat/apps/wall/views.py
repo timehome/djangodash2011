@@ -5,7 +5,7 @@ from json import dumps
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 from myimgat.providers.google import GoogleImageProvider
 
@@ -30,6 +30,8 @@ def index(request, username=None):
 def albums(request, username=None, extension="json"):
     provider = GoogleImageProvider(username)
     albums = provider.load_albums()
+    if not albums:
+        return HttpResponseNotFound()
     for album in albums:
         provider.load_photos(album)
 
