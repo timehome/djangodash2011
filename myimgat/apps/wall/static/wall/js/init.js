@@ -56,7 +56,7 @@
                             this.addClass('error');
                         }.bind(placeholder));
                         img.addEvent('dblclick', function(){
-                            location.href = usernamer + '/photos/'+ images[counterFluid].url;
+                            location.href = username + '/photos/'+ images[counterFluid].url;
                         });
                         img.set('src', images[counterFluid].thumbnail);
                         placeholder.grab(img);
@@ -74,6 +74,11 @@
     }
 
     request.get();
+
+    popin: {
+        var popin = new Popin('popin');
+        popin.show('welcome');
+    }
 
 }(this, document.id));
 

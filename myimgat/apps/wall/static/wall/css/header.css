@@ -19,9 +19,6 @@ header {
     box-shadow: 0 1px 4px #333;
     -moz-box-shadow: 0 1px 4px #333;
 }
-header.scrolling {
-    background: rgba(20, 20, 20, 0.8);
-}
 header h1 {
     color: #6b21a9;
     font-family: 'Leckerli One', cursive;
@@ -39,7 +36,6 @@ header h1:hover {
         0 0 5px #fff;
 }
 nav {
-    width: 400px;
     overflow: hidden;
     float: left;
     padding-top: 1px;

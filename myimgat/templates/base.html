@@ -7,7 +7,7 @@
         <meta name="robots" content="All" />
         <meta name="author" content="timehome@djangodash" />
         <meta name="description" content="Your own wall of pictures" />
-        <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
         {% block head %}
         {% endblock %}
@@ -18,9 +18,11 @@
         <![endif]-->
     </head>
     <body>
-{% block body %}
-{% endblock %}
-    <script src="{{ STATIC_URL }}wall/js/analytics.js"></script>
+
+        {% block body %}
+        {% endblock %}
+
+        <script src="{{ STATIC_URL }}wall/js/analytics.js"></script>
     </body>
 </html>
 
