@@ -7,6 +7,12 @@
     z-index: 1;
     overflow: hidden;
 }
+.wall .tile {
+    background: url(../img/ajax-loader.gif) center center no-repeat;
+}
+.wall .tile.error {
+    background: none;
+}
 .wall img {
     float: left;
 }
