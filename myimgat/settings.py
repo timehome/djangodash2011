@@ -147,6 +147,10 @@ INSTALLED_APPS = (
     'django_nose',
 )
 
+# wall app settings
+DEFAULT_USER_WALL = 'rafael.jacinto'
+# end of wall settings
+
 # django-nose app settings
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', '.']
