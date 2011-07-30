@@ -13,7 +13,7 @@
     {% for album in albums %}
         {% if album.photos %}
             {% for photo in album.photos %}
-            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" title="{{ photo.title }}" /></span>
+            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" /></span>
             {% endfor %}
         {% endif %}
     {% endfor %}
