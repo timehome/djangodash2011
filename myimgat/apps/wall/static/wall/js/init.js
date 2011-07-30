@@ -2,18 +2,15 @@
 
     var headerElement = $('header');
 
-    header: {
-        var header = new Header(headerElement);
-        $(global).addListener('scroll', function(e){
-            header.reactToScroll(e);
-        });
+    cropPopin: {
+        var cropPopin = new CropPopin('crop-popin');
     }
 
     albumsRequest: {
-        var username = "";
-        username = window.location.href.match(/\/([^/]+)$/);
-        if (username){
-            username = username[1];
+        var username;
+        var urlUsername = window.location.href.match(/\/([^/]+)$/);
+        if (urlUsername) {
+            username = urlUsername = urlUsername[1];
         } else if (global.settings.authUsername) {
             username = global.settings.authUsername;
         } else {
@@ -24,8 +21,9 @@
         });
     }
 
+
     wall: {
-        var navigation = headerElement.getElement('nav');
+        var navigation = headerElement.getElement('nav.albums');
         var images = [];
         //var albumsFirstIndexes = {};
 
@@ -52,16 +50,19 @@
                         var image = images[counterFluid % images.length];
                         var img = new Element('img');
 
-                        img.addEvent('load', function(){
-                            this.addClass('success');
-                        }.bind(placeholder));
-                        img.addEvent('error', function(){
-                            this.grab(document.createTextNode(':( was not possible to load this image'));
-                            this.addClass('error');
-                        }.bind(placeholder));
-                        img.addEvent('dblclick', function(){
-                            location.href = username + '/photos/'+ image.url;
+                        img.addEvents({
+                            'load':function(){
+                                this.addClass('success');
+                            }.bind(placeholder),
+
+                            'error': function(){
+                                this.grab(document.createTextNode(':( was not possible to load this image'));
+                                this.addClass('error');
+                            }.bind(placeholder),
+
+                            'dblclick': cropPopin.show.bind(this)
                         });
+
                         img.set('src', image.thumbnail);
                         placeholder.grab(img);
 
@@ -80,7 +81,7 @@
     }
 
     popin: {
-        if (!settings.authUsername) {
+        if (!settings.authUsername && !urlUsername) {
             var popin = new Popin('simple-popin');
             popin.show('login');
         }
