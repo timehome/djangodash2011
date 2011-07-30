@@ -37,17 +37,21 @@
                 rangey: [-images.length, images.length],
                 callOnUpdate: function(items){
                     for (var i = 0, l = items.length; i < l; i++) {
-                        var e = items[i];
+                        var placeholder = items[i].node;
+
                         var img = new Element('img');
                         img.addEvent('load', function(){
                             this.addClass('success');
-                        }.bind(e.node));
+                        }.bind(placeholder));
                         img.addEvent('error', function(){
                             this.grab(document.createTextNode(':( was not possible to load this image'));
                             this.addClass('error');
-                        }.bind(e.node));
+                        }.bind(placeholder));
+                        img.addEvent('dblclick', function(){
+                            location.href = usernamer + '/photos/'+ images[counterFluid].url;
+                        });
                         img.set('src', images[counterFluid].thumbnail);
-                        e.node.grab(img);
+                        placeholder.grab(img);
 
                         counterFluid++;
                         // Reset counter
