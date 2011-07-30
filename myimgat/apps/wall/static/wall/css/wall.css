@@ -1,5 +1,11 @@
 .wall {
-    padding-top: 47px;
+    position: absolute;
+    top: 46px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow: hidden;
 }
 .wall img {
     float: left;
