@@ -22,7 +22,7 @@ class AlbumManager(models.Manager):
         return albums
 
 class Album(models.Model):
-    username = models.CharField(max_length=100, db_index=True)
+    username = models.CharField(default="", blank=True, max_length=100, db_index=True)
     identifier = models.CharField(max_length=200, db_index=True)
     url = models.CharField(max_length=500, null=True, blank=True, db_index=True)
     title = models.CharField(max_length=200, null=True, blank=True)
