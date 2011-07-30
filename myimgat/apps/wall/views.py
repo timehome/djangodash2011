@@ -45,7 +45,9 @@ def albums(request, username=None, extension="json"):
             album_data['photos'].append({
                 'url': photo.url,
                 'title': photo.title,
-                'thumbnail': photo.thumbnail
+                'thumbnail': photo.thumbnail,
+                'width': photo.width,
+                'height': photo.height
             })
         data.append(album_data)
     data = dumps(data)
