@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% load thumbor_tags %}
+
+{% block body %}
+<h2>{{ photo.title }}</h2>
+<img src="{% thumbor_url_unsafe photo.url "fit-in/450x500" %}" />
+{% endblock %}
