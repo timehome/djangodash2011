@@ -10,16 +10,5 @@
 {% endblock %}
 
 {% block content %}
-<div id="wall" class="wall">
-</div>
-<script>
-    var images = [];
-    {% for album in albums %}
-        {% if album.photos %}
-            {% for photo in album.photos %}
-                images.push("{{ photo.thumbnail }}");
-            {% endfor %}
-        {% endif %}
-    {% endfor %}
-</script>
+<div id="wall" class="wall"></div>
 {% endblock %}
