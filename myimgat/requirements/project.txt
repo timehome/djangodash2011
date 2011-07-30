@@ -5,3 +5,4 @@ gondor==1.0b1.post10
 libthumbor==0.5.0
 pycrypto==2.3
 wsgiref==0.1.2
+gdata
