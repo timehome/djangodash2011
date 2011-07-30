@@ -144,6 +144,7 @@ INSTALLED_APPS = (
 
     # external apps
     'social_auth',
+    'south',
     'django_nose',
 )
 
