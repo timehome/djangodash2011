@@ -19,7 +19,7 @@ setup:
 	@pip install -r ${REQ_PATH}
 
 db:
-	@cd myimgat/ && python manage.py syncdb
+	@cd myimgat/ && python manage.py syncdb && python manage.py migrate
 
 deploy:
 	@cd myimgat/ && gondor deploy primary master
