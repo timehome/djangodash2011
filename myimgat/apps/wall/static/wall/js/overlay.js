@@ -19,25 +19,27 @@
         },
 
         show: function() {
-            this.element.fade('in');
+            return this.element.fade('in');
         },
 
         hide: function() {
-            this.element.fade('out');
+            return this.element.fade('out');
         },
 
         block: function() {
             this.block = true;
+            return this;
         },
 
         unblock: function() {
             this.block = false;
+            return this;
         },
 
         onClose: function() {
             if (this.block) return;
             this.hide();
-            this.fireEvent('close');
+            return this.fireEvent('close');
         }
     });
 
