@@ -14,8 +14,3 @@ db:
 
 deploy:
 	@cd myimgat/ && gondor deploy primary master
-
-commit:
-	@git st && git commit -am "Fast commit from $(whoami) ..." && git push
-
-co: commit
