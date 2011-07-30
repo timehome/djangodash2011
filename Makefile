@@ -16,4 +16,4 @@ deploy:
 	@cd myimgat/ && gondor deploy primary master
 
 test:
-	@env PYTHONPATH=. nosetests -
+	@env PYTHONPATH=. nosetests -v -s --with-coverage --cover-erase --cover-package=myimgat --cover-inclusive tests/
