@@ -12,9 +12,19 @@ from myimgat.providers.google import GoogleImageProvider
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
 
 def index(request, username=DEFAULT_USER_WALL):
-    return render(request, 'wall/index.html')
+    if not username:
+        if not request.user.is_authenticated():
+            username = DEFAULT_USER_WALL
+        else:
+            username = request.user.email.split('@')[0]
+    return render(request, 'wall/index.html', {'username': username})
 
 def albums(request, username=DEFAULT_USER_WALL, extension="json"):
+    if not username:
+        if not request.user.is_authenticated():
+            username = DEFAULT_USER_WALL
+        else:
+            username = request.user.email.split('@')[0]
     provider = GoogleImageProvider(username)
     albums = provider.load_albums()
     #for album in albums:

@@ -6,16 +6,20 @@
         <a class="selected" href="#{{ album.identifier }}" title="{{ album.title }}">{{ album.title }}</a>
         {% endif %}
     {% endfor %}
+    <a href="{% url socialauth_begin "google" %}">login</a>
 {% endblock %}
 
 {% block content %}
 <div id="wall" class="wall">
+</div>
+<script>
+    var images = [];
     {% for album in albums %}
         {% if album.photos %}
             {% for photo in album.photos %}
-            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" /></span>
+                images.push("{{ photo.thumbnail }}");
             {% endfor %}
         {% endif %}
     {% endfor %}
-</div>
+</script>
 {% endblock %}

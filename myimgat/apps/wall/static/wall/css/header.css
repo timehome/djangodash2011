@@ -1,6 +1,7 @@
 header {
     position: fixed;
     overflow: hidden;
+    z-index: 2;
     left: 0;
     top: 0;
     right: 0;
@@ -24,11 +25,11 @@ header h1 {
     font-family: 'Leckerli One', cursive;
     font-size: 28px;
     float: left;
-    padding:  0 20px 8px 0;
     line-height: 22px;
     cursor: default;
     text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff;
-    margin-right: 20px;
+    padding:  0 14px 8px 0;
+    margin-right: 14px;
     border-right: 1px solid #474747;
 }
 header h1:hover {
@@ -44,7 +45,7 @@ nav a {
     padding: 4px;
     float: left;
     text-decoration: none;
-    margin-right: 4px;
+    margin-right: 6px;
     font-size: 12px;
 }
 nav a:hover {

@@ -175,10 +175,11 @@ AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.OpenIDBackend',
     #'django.contrib.auth.backends.ModelBackend',
 )
-LOGIN_URL = '/login'
 
 from django.template.defaultfilters import slugify
 SOCIAL_AUTH_USERNAME_FIXER = lambda u: slugify(u)
+
+LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_UUID_LENGTH = 16
 SOCIAL_AUTH_EXTRA_DATA = True
