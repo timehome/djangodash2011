@@ -23,9 +23,7 @@
 
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
-                // adicionar item no menu
                 navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
-                // adicionar imagens na wall
                 images.push.apply(images, albums[i].photos);
             };
 
@@ -38,15 +36,16 @@
                 rangex: [-images.length, images.length],
                 rangey: [-images.length, images.length],
                 callOnUpdate: function(items){
-                    items.each(function(e, i){
+                    for (var i = 0, l = items.length; i < l; i++) {
+                        var e = items[i];
                         var img = new Element('img');
                         img.addEvent('load', function(){
-                            e.node.addClass('success');
-                        });
+                            this.addClass('success');
+                        }.bind(e.node));
                         img.addEvent('error', function(){
-                            e.node.grab(document.createTextNode(':( was not possible to load this image'));
-                            e.node.addClass('error');
-                        });
+                            this.grab(document.createTextNode(':( was not possible to load this image'));
+                            this.addClass('error');
+                        }.bind(e.node));
                         img.set('src', images[counterFluid].thumbnail);
                         e.node.grab(img);
 
@@ -55,7 +54,7 @@
                         if (counterFluid >= images.length) {
                             counterFluid = 0;
                         }
-                    });
+                    }
                 }
             });
             wall.initWall();
