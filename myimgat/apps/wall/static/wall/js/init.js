@@ -41,13 +41,14 @@
                     items.each(function(e, i){
                         var img = new Element('img');
                         img.addEvent('load', function(){
-                            img.inject(e.node).fade('in');
+                            e.node.addClass('success');
                         });
                         img.addEvent('error', function(){
                             e.node.grab(document.createTextNode(':( was not possible to load this image'));
                             e.node.addClass('error');
                         });
-                        img.set('src', images[counterFluid].thumbnail).fade('hide');
+                        img.set('src', images[counterFluid].thumbnail);
+                        e.node.grab(img);
 
                         counterFluid++;
                         // Reset counter
