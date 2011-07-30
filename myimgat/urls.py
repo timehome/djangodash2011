@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
     url('^favicon.ico$', redirect_to, {'url': '%s/favicon.ico' % settings.STATIC_URL}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {"next_page": "/"}, name="logout"),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),
