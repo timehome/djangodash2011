@@ -7,9 +7,12 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 
+from providers.google import format_url
+
 from models import AlbumProxy, PhotoProxy
 
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
+THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://%d.thby.nl')
 
 def load_username(func):
     def _load_username(*args, **kwargs):
@@ -41,6 +44,7 @@ def albums(request, username=None, extension="json"):
                 'url': photo.url,
                 'title': photo.title,
                 'thumbnail': photo.thumbnail,
+                'crop_url': "%s/unsafe/%s/%s" % (THUMBOR_SERVER, 'fit-in/600x500', format_url(photo.url)),
                 'width': photo.width,
                 'height': photo.height
             })
