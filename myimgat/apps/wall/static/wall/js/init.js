@@ -10,9 +10,9 @@
     }
 
     albumsRequest: {
-        username = /(?:.+?)\/(.+)/.exec(window.location)[0];
+        var username = /(?:.+?)\/(.+)/.exec(window.location)[0];
         var request = new Request.JSON({
-            url: '/' + username + '.json'
+            url: '/'+ username +'.json'
         });
     }
 
@@ -24,7 +24,7 @@
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
                 // adicionar item no menu
-                navigation.grab(new Element('a', {html: albums[i].title}));
+                navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
                 // adicionar imagens na wall
                 images.push.apply(images, albums[i].photos);
             };
