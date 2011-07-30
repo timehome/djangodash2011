@@ -75,5 +75,10 @@
 
     request.get();
 
+    popin: {
+        var popin = new Popin('popin');
+        popin.show('welcome');
+    }
+
 }(this, document.id));
 

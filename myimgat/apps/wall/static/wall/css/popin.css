@@ -9,4 +9,22 @@
     background: white;
     border-radius: 4px;
     box-shadow: 0 0 0 10px rgba(120, 120, 120, 0.6);
+    visibility: hidden;
+}
+
+.popin > * {
+    display: none;
+}
+
+.popin .show {
+    display: block;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    display: none;
 }
