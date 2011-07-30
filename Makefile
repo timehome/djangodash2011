@@ -1,0 +1,18 @@
+all: run
+
+run:
+	@cd myimgat/ && python manage.py runserver
+
+update_deps:
+	@pip freeze > myimgat/requirements/project.txt
+
+db:
+	@cd myimgat/ && python manage.py syncdb
+
+deploy:
+	@cd myimgat/ && gondor deploy primary master
+
+commit:
+	@git st && git commit -am "Fast commit..."
+
+co: commit
