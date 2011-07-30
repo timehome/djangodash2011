@@ -11,7 +11,7 @@
     background: url(../img/ajax-loader.gif) center center no-repeat;
 }
 .wall .tile.error {
-    background: none;
+    background: url(../img/not-found.png) center center no-repeat;
 }
 .wall img {
     opacity: 0;
