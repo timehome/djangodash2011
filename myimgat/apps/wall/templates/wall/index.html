@@ -8,7 +8,8 @@
     {% endfor %}
     {% if user.is_authenticated %}
         <script>
-            var auth_username = "{{ username }}";
+            settings = this.settings || {};
+            settings.authUsername = "{{ username }}";
         </script>
         <a class="selected" href="/logout/">logout</a>
     {% else %}
