@@ -7,7 +7,7 @@
         {% if album.photos %}
             <h1><a href="{{ album.url }}">{{ album.title }}</a></h1>
             {% for photo in album.photos %}
-            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" title="{{ photo.title }}" /></span>
+            <span class="pic"><img src="{{ photo.thumbnail }}" alt="{{ photo.title }}" /></span>
             {% endfor %}
         {% endif %}
     {% endfor %}

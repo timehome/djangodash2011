@@ -149,7 +149,7 @@ INSTALLED_APPS = (
 
 # django-nose app settings
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', 'tests/']
+NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', '.']
 # end of django-nose settings
 
 # provider settings
