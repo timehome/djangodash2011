@@ -9,7 +9,7 @@
     {% if user.is_authenticated %}
         <script>
             settings = this.settings || {};
-            settings.authtUsername = "{{ username }}";
+            settings.authUsername = "{{ username }}";
         </script>
         <a class="selected" href="/logout/">logout</a>
     {% else %}

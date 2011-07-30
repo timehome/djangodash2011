@@ -14,10 +14,10 @@
         username = window.location.href.match(/\/([^/]+)$/);
         if (username){
             username = username[1];
-        } else if (global.auth_username) {
-            username = global.auth_username;
+        } else if (global.settings.authUsername) {
+            username = global.settings.authUsername;
         } else {
-            username = global.default_username;
+            username = global.defaultUsername;
         }
         var request = new Request.JSON({
             url: '/api/'+ username +'.json'
@@ -35,19 +35,23 @@
                 images.push.apply(images, albums[i].photos);
             };
 
+            var wallSideSize = Math.sqrt(images.length);
+            var rangeSize = Math.max(Math.ceil(wallSideSize / 2), 16);
+
             var counterFluid = 0;
             var wall = new Wall("wall", {
                 draggable: true,
                 inertia: true,
                 width: 128,
                 height: 128,
-                rangex: [-images.length, images.length],
-                rangey: [-images.length, images.length],
+                rangex: [-rangeSize, rangeSize],
+                rangey: [-rangeSize, rangeSize],
                 callOnUpdate: function(items){
                     for (var i = 0, l = items.length; i < l; i++) {
                         var placeholder = items[i].node;
-
+                        var image = images[counterFluid % images.length];
                         var img = new Element('img');
+
                         img.addEvent('load', function(){
                             this.addClass('success');
                         }.bind(placeholder));
@@ -56,16 +60,12 @@
                             this.addClass('error');
                         }.bind(placeholder));
                         img.addEvent('dblclick', function(){
-                            location.href = username + '/photos/'+ images[counterFluid].url;
+                            location.href = username + '/photos/'+ image.url;
                         });
-                        img.set('src', images[counterFluid].thumbnail);
+                        img.set('src', image.thumbnail);
                         placeholder.grab(img);
 
                         counterFluid++;
-                        // Reset counter
-                        if (counterFluid >= images.length) {
-                            counterFluid = 0;
-                        }
                     }
                 }
             });
