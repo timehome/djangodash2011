@@ -10,7 +10,7 @@
     }
 
     albumsRequest: {
-        var username = /(?:.+?)\/(.+)/.exec(window.location)[0];
+        var username = window.location.href.match(/\/([^/]+)$/)[1];
         var request = new Request.JSON({
             url: '/'+ username +'.json'
         });
