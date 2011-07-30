@@ -6,6 +6,9 @@ run:
 update_deps:
 	@pip freeze > myimgat/requirements/project.txt
 
+setup:
+	@pip install -r myimgat/requirements/project.txt
+
 db:
 	@cd myimgat/ && python manage.py syncdb
 
