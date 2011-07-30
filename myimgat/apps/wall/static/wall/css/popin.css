@@ -1,12 +1,7 @@
 .popin {
     position: absolute;
     z-index: 100;
-    left: 50%;
-    width: 400px;
-    margin: 0 0 0 -200px;
-    top: 80px;
-    bottom: 40px;
-    background: white;
+    background: #fff;
     border-radius: 4px;
     box-shadow: 0 0 0 10px rgba(120, 120, 120, 0.6);
     visibility: hidden;
@@ -20,12 +15,9 @@
     display: block;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 99;
+.simple-popin {
+    top: 100px;
+    left: 50%;
+    width: 400px;
+    margin: 0 0 0 -200px;
 }
