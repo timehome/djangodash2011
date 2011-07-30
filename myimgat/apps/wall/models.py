@@ -63,7 +63,7 @@ class Photo(models.Model):
     height = models.IntegerField(blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse("photo_url", kwargs={'photo_url': self.id})
+        return reverse("photo_url", kwargs={'photo_id': self.id})
 
 class PhotoProxy(Photo):
     objects = PhotoManager()
