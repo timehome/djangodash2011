@@ -141,20 +141,22 @@ INSTALLED_APPS = (
 
     # project specific apps
     'wall',
-    'providers',
 
     # external apps
     'social_auth',
+    'django_nose',
 )
 
+# django-nose app settings
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', 'tests/']
+# end of django-nose settings
+
 # provider settings
-
 DEFAULT_THUMB_SIZE = (128, 128)
-
-# end provider app settings
+# end provider settings
 
 # social_auth specific configs
-
 AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.twitter.TwitterBackend',
     #'social_auth.backends.facebook.FacebookBackend',
@@ -169,7 +171,6 @@ AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.OpenIDBackend',
     #'django.contrib.auth.backends.ModelBackend',
 )
-
 LOGIN_URL = '/login'
 
 from django.template.defaultfilters import slugify
