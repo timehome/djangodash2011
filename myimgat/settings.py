@@ -163,7 +163,7 @@ DEFAULT_USER_WALL = 'heynemann'
 
 # django-nose app settings
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', '.']
+NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=myimgat', '--cover-inclusive', '.']
 # end of django-nose settings
 
 # provider settings
