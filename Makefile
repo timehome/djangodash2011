@@ -23,3 +23,5 @@ deploy:
 
 test:
 	@env PYTHONPATH=. python myimgat/manage.py test
+
+
