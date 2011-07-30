@@ -2,18 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from os.path import join
-from django.conf import settings
 import random
 
 import gdata.photos.service
 import gdata.media
 import gdata.geo
-
+from django.conf import settings
 from libthumbor import CryptoURL
 
 from myimgat.providers.base import ImageProvider, Album, Photo
 
 THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY', 'my-security-key')
+
+def format_url(url):
+    return url.replace('http://', '').replace('https://', '')
 
 class GoogleImageProvider(ImageProvider):
     def load_albums(self):
@@ -33,8 +35,8 @@ class GoogleImageProvider(ImageProvider):
             '/data/feed/api/user/%s/albumid/%s?kind=photo' % (
                 self.username, album.identifier))
         for photo in photos.entry:
-            url = photo.content.src
-            thumb = '/unsafe/%dx%d/smart/%s' % (self.thumb_size[0], self.thumb_size[1], url)
+            url = format_url(photo.content.src)
+            thumb = '/unsafe/%dx%d/smart/%s' % (self.thumb_size[0], self.thumb_size[1], format_url(photo.media.thumbnail[-1].url))
             #thumb = crypto.generate(
                 #width=self.thumb_size[0],
                 #height=self.thumb_size[1],
