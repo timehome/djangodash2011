@@ -44,7 +44,6 @@ class GoogleImageProvider(ImageProvider):
                 #image_url=url
             #)
             server = '%d' in self.thumbor_server and self.thumbor_server % random.choice([1,2,3]) or self.thumbor_server
-            import ipdb;ipdb.set_trace()
             photo = Photo(url=url, title=photo.title.text, thumbnail=join(server.rstrip('/'), thumb.lstrip('/')),
                           width=int(photo.width.text), height=int(photo.height.text))
             album.photos.append(photo)
