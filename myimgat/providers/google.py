@@ -29,6 +29,7 @@ class GoogleImageProvider(ImageProvider):
         return parsed_albums
 
     def load_photos(self, album):
+        photos_result = []
         crypto = CryptoURL(key=THUMBOR_SECURITY_KEY)
         gd_client = gdata.photos.service.PhotosService()
         photos = gd_client.GetFeed(
@@ -46,4 +47,5 @@ class GoogleImageProvider(ImageProvider):
             server = '%d' in self.thumbor_server and self.thumbor_server % random.choice([1,2,3]) or self.thumbor_server
             photo = Photo(url=url, title=photo.title.text, thumbnail=join(server.rstrip('/'), thumb.lstrip('/')),
                           width=int(photo.width.text), height=int(photo.height.text))
-            album.photos.append(photo)
+            photos_result.append(photo)
+        return photos_result
