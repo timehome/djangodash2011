@@ -12,7 +12,7 @@
         <a class="{{ association.class }}" href="{{ association.url }}">{{ association.label }}</a>
     {% endfor %}
 
-    <span>{{ username }}</span>
+    <span>{{ request.user.username }}</span>
     <a href="/logout/">logout</a>
     {% endif %}
 {% endblock %}
