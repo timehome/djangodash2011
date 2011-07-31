@@ -173,7 +173,7 @@ DEFAULT_THUMB_SIZE = (128, 128)
 # social_auth specific configs
 AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.twitter.TwitterBackend',
-    #'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.facebook.FacebookBackend',
     #'social_auth.backends.google.GoogleOAuthBackend',
     #'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.google.GoogleBackend',
@@ -200,6 +200,8 @@ FACEBOOK_API_SECRET = 'c462511f5ca9feb2aa193f15ccd2f1b1'
 FACEBOOK_EXTENDED_PERMISSIONS = ['publish_stream', 'user_photos', 'user_status', 'read_friendlists']
 
 LOGIN_URL = '/'
+LOGIN_ERROR_URL = '/login_error/'
+
 # end of social_auth specifc config
 
 
