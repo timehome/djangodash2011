@@ -12,11 +12,21 @@
                     load: function(){
                         var size = this.getSize();
                         new MooCrop(this, {
+                            initialCrop: {
+                                top: 0,
+                                left: 0,
+                                width: size.x - 10,
+                                height: size.y - 10
+                            },
                             min: {width: 50, height: 50},
                             maskColor: '#ddd',
+                            maskOpacity: 0.2,
                             constrainRatio: false,
                             handleColor: '#ccc',
-                            cropBorder: 'dashed 1px #000'
+                            cropBorder: 'dashed 1px #000',
+                            onComplete: function(){
+                                console.log(this, arguments);
+                            }
                         });
                     }
                 }
@@ -74,7 +84,6 @@
                                 }.bind(placeholder),
 
                                 'error': function(){
-                                    this.grab(document.createTextNode(':( was not possible to load this image'));
                                     this.addClass('error');
                                 }.bind(placeholder),
 
