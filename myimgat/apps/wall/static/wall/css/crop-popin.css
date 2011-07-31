@@ -70,3 +70,12 @@
     height: 78px;
     padding: 10px;
 }
+
+.social-item {
+    margin-right: 10px;
+    float: left;
+}
+
+#___plusone_0 {
+    width: 58px !important;
+}
