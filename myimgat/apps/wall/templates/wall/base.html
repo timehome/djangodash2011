@@ -46,7 +46,11 @@
     {% block js %}
     <script>
         settings = this.settings || {};
-        settings.defaultUsername = "{{ username }}";
+        settings.defaultUsername = '{{ username }}';
+        settings.urls = {
+        shorten: '{% url wall.views.save_cropped_photo %}',
+            userAlbums: '/api/{username}.json'
+        };
     </script>
     <script src="{{ STATIC_URL }}wall/js/mootools-core-1.3.2-compat.js"></script>
     <script src="{{ STATIC_URL }}wall/js/mootools-more-1.3.2.1.js"></script>

@@ -51,7 +51,7 @@
             username = global.settings.defaultUsername;
         }
         var request = new Request.JSON({
-            url: '/api/'+ username +'.json'
+            url: settings.urls.userAlbums.substitute({username: username})
         });
     }
 

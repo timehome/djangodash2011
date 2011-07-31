@@ -28,7 +28,7 @@
     margin-bottom: 16px;
 }
 
-.crop-popin .crop .share-crop {
+.crop-popin .crop .share-button {
     display: block;
     font-size: 26px;
     border-top: 2px solid #ab17a4;
@@ -48,11 +48,11 @@
     background: linear-gradient(top, #8f1c93 0%,#541051 100%);
 }
 
-.crop-popin .crop .share-crop:hover {
+.crop-popin .crop .share-button:hover {
     background: #8f1c93;
 }
 
-.crop-popin .crop .share-crop:active {
+.crop-popin .crop .share-button:active {
     border-top: 2px solid #481c46;
     border-bottom: 2px solid #ab17a4;
 }
