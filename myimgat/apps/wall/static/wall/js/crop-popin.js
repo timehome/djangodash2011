@@ -33,7 +33,6 @@
             data["id"] = this.image.id;
             data[this.token.get('name')] = this.token.get('value');
             this.request.addEvent('success', function(url) {
-                self.shareArea.fade('out');
                 self.croppedLink.set('href', url);
                 self.croppedLink.set('text', self.image.title);
                 self.embedURL.set('text', url);
@@ -49,6 +48,7 @@
                 this.showTab(tab);
             }
             this.element.addClass('show');
+            this.shareArea.fade('out');
             return this;
         },
 

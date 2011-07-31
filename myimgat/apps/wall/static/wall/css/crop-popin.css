@@ -61,4 +61,12 @@
     visibility: hidden;
 }
 
-
+.markup {
+    font-family: courier;
+    font-size: 13px;
+    background-color: #333;
+    color: white;
+    width: 580px;
+    height: 78px;
+    padding: 10px;
+}
