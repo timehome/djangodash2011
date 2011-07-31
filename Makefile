@@ -18,6 +18,11 @@ setup_dev:
 setup:
 	@pip install -r ${REQ_PATH}
 
+drop:
+	@mysql -u root -e 'DROP DATABASE IF EXISTS myimgat'
+	@mysql -u root -e 'CREATE DATABASE IF NOT EXISTS myimgat'
+	@make db
+
 db:
 	@cd myimgat/ && python manage.py syncdb && python manage.py migrate
 
