@@ -5,7 +5,7 @@ from json import dumps
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import Http404, HttpResponse, HttpResponseNotFound
+from django.http import Http404, HttpResponse
 
 from providers.base import format_url
 
