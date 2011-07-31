@@ -1,11 +1,14 @@
 html {
     overflow: hidden;
 }
-html, body, h1, h2 {
+html, body, h1, h2, ul, ol{
     padding: 0;
     margin: 0;
 }
 body {
     background: #ddd;
     font-family: arial,helvetica,freesans,sans-serif;
+}
+ul, ol{
+    list-style: none;
 }

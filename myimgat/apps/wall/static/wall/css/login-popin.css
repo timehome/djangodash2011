@@ -1,0 +1,27 @@
+.popin .login {
+    color: #333;
+    padding: 20px;
+}
+.popin .login ul {
+    overflow: hidden;
+}
+.popin .login ul a {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    text-indent: -500px;
+}
+.popin .login ul li {
+    padding-right: 20px;
+    overflow: hidden;
+    float: left;
+}
+.popin .login ul .fb a {
+    background: url(../img/facebook-pencil.png) no-repeat;
+}
+.popin .login ul .go a {
+    background: url(../img/google-pencil.png) no-repeat;
+}
+
+
