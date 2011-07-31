@@ -29,19 +29,36 @@ var Lasso = new Class({
         this.setOptions(options);
 
         this.box = new Element('div', {
-            'styles' : { 'display' : 'none', 'position' : 'absolute',  'z-index' : this.options.zindex }
+            'styles' : {
+                'display' : 'none',
+                'position' : 'absolute',
+                'z-index' : this.options.zindex
+            }
         }).inject((this.container) ? this.container : document.body);
 
         this.overlay = new Element('div',{
-            'styles' : { 'position' : 'relative', 'background' : 'url(blank.gif)', 'height' : '100%', 'width' : '100%',   'z-index' : this.options.zindex+1 }
+            'styles' : {
+                'position' : 'relative',
+                'background' : 'url(blank.gif)',
+                'height' : '100%',
+                'width' : '100%',
+                'z-index' : this.options.zindex+1
+            }
         }).inject(this.box);
 
         this.mask = new Element('div',{
-            'styles' : { 'position' : 'absolute', 'background-color' : this.options.color, 'opacity' : this.options.opacity, 'height' : '100%', 'width' : '100%', 'z-index' : this.options.zindex-1 }
+            'styles' : {
+                'position' : 'absolute',
+                'background-color' : this.options.color,
+                'opacity' : this.options.opacity,
+                'height' : '100%',
+                'width' : '100%',
+                'z-index' : this.options.zindex-1
+            }
         });
 
         if(this.options.cropMode){
-            this.mask.setStyle('z-index',this.options.zindex-2).inject(this.container);
+            this.mask.setStyle('z-index', this.options.zindex-2).inject(this.container);
             this.options.trigger = this.mask; // override trigger since we are a crop
         } else {
             this.mask.inject(this.overlay);
@@ -50,21 +67,30 @@ var Lasso = new Class({
         this.trigger = $(this.options.trigger);
 
         // Marching Ants
-        var antStyles = { 'position' : 'absolute', 'width' : 1, 'height' : 1, 'overflow' : 'hidden', 'z-index' : this.options.zindex+1 };
+        var antStyles = {
+            'position' : 'absolute',
+            'width' : 1,
+            'height' : 1,
+            'overflow' : 'hidden',
+            'z-index' : this.options.zindex+1
+        };
 
-        if( this.options.border.test(/\.(jpe?g|gif|png)/) ) antStyles.backgroundImage = 'url('+this.options.border+')';
-        else var antBorder = '1px dashed '+this.options.border;
+        if (this.options.border.test(/\.(jpe?g|gif|png)/)) {
+            antStyles.backgroundImage = 'url('+this.options.border+')';
+        } else {
+            var antBorder = '1px dashed '+this.options.border;
+        }
 
         this.marchingAnts = {};
-        ['left','right','top','bottom'].each(function(side,idx){
+        ['left', 'right', 'top', 'bottom'].each(function(side,idx){
             switch(side){
-                case 'left' : style = $merge(antStyles,{top : 0, left : -1, height : '100%'}); break;
-                case 'right' : style = $merge(antStyles,{top : 0, right : -1, height : '100%'}); break;
-                case 'top' : style = $merge(antStyles,{top : -1, left : 0, width : '100%'}); break;
-                case 'bottom' : style = $merge(antStyles,{bottom : -1, left : 0, width : '100%'}); break;
+                case 'left' : style = Object.merge({}, antStyles, {top : 0, left : -1, height : '100%'}); break;
+                case 'right' : style = Object.merge({}, antStyles, {top : 0, right : -1, height : '100%'}); break;
+                case 'top' : style = Object.merge({}, antStyles, {top : -1, left : 0, width : '100%'}); break;
+                case 'bottom' : style = Object.merge({}, antStyles, {bottom : -1, left : 0, width : '100%'}); break;
             }
-            if(antBorder) style['border-'+side] = antBorder;
-            this.marchingAnts[side] = new Element('div',{ 'styles' : style}).inject(this.overlay);
+            if (antBorder) style['border-'+side] = antBorder;
+            this.marchingAnts[side] = new Element('div', {'styles' : style}).inject(this.overlay);
         },this);
 
         this.binds.start = this.start.bindWithEvent(this);
@@ -73,11 +99,15 @@ var Lasso = new Class({
 
         this.attach();
 
-        document.body.onselectstart = function(e){ e = new Event(e).stop(); return false; };
+        document.body.onselectstart = function(e){e = new Event(e).stop(); return false;};
 
         // better alternative?
-        this.removeDOMSelection = (document.selection && document.selection.empty) ? function(){ document.selection.empty(); } :
-            (window.getSelection) ? function(){ var s=window.getSelection();if(s && s.removeAllRanges) s.removeAllRanges();} : $lambda(false);
+        this.removeDOMSelection = (document.selection && document.selection.empty) ? function(){
+            document.selection.empty();
+        } : (window.getSelection) ? function(){
+            var s = window.getSelection();
+            if(s && s.removeAllRanges) s.removeAllRanges();
+        } : Function.from(false);
 
         this.resetCoords();
     },
@@ -87,17 +117,19 @@ var Lasso = new Class({
     },
 
     detach : function(){
-        if(this.active) this.end();
+        if (this.active) this.end();
         this.trigger.removeEvent('mousedown', this.binds.start);
     },
 
     start : function(event){
-        if((!this.options.autoHide && event.target == this.box) || (!this.options.globalTrigger && (this.trigger != event.target))) return false;
+        if ((!this.options.autoHide && event.target == this.box)
+            || (!this.options.globalTrigger && (this.trigger != event.target))) return false;
+
         this.active = true;
-        document.addEvents({ 'mousemove' : this.binds.move, 'mouseup' : this.binds.end });
+        document.addEvents({'mousemove' : this.binds.move, 'mouseup' : this.binds.end});
         this.resetCoords();
-        if(this.options.contain) this.getContainCoords();
-        if(this.container) this.getRelativeOffset();
+        if (this.options.contain) this.getContainCoords();
+        if (this.container) this.getRelativeOffset();
         this.setStartCoords(event.page);
         this.fireEvent('start');
         return true;
@@ -178,7 +210,7 @@ var Lasso = new Class({
 
     setStartCoords : function(coords){
         if(this.container){ coords.y -= this.offset.top; coords.x -= this.offset.left; }
-        this.coords.start = coords;  this.coords.w = 0; this.coords.h = 0;
+        this.coords.start = coords; this.coords.w = 0; this.coords.h = 0;
         this.box.setStyles({ 'display' : 'block', 'top' : this.coords.start.y, 'left' : this.coords.start.x });
     },
 
@@ -189,7 +221,7 @@ var Lasso = new Class({
     },
 
     getRelativeCoords : function(){
-        var box = this.coords.box, cc = $merge(this.coords.container), c = this.coords;
+        var box = this.coords.box, cc = Object.merge({}, this.coords.container), c = this.coords;
         if(!this.options.contain) cc = { x : [0,0], y : [0,0]};
         return { x : (box.x[0] - cc.x[0]).toInt(), y : (box.y[0] - cc.y[0]).toInt(), w : (c.w).toInt(), h : (c.h).toInt() };
     },

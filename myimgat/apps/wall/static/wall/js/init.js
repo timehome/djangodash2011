@@ -11,20 +11,12 @@
                 events: {
                     load: function(){
                         var size = this.getSize();
-                        var top = Math.round(size.y / 2) - 50;
-                        var left = Math.round(size.x / 2) - 50;
-
-                        new Lasso.Crop(this, {
-                            preset: [left, top, left + 100, top + 100],
-                            min: [50, 50],
-                            color: '#ddd',
-                            border: '/static/wall/img/crop.gif',
-                            onStart: function(){
-                                console.log(this, arguments);
-                            },
-                            onResize: function(){
-                                //console.log(this, arguments);
-                            }
+                        new MooCrop(this, {
+                            min: {width: 50, height: 50},
+                            maskColor: '#ddd',
+                            constrainRatio: false,
+                            handleColor: '#ccc',
+                            cropBorder: 'dashed 1px #000'
                         });
                     }
                 }
