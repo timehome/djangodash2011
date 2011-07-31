@@ -16,7 +16,16 @@
 
         createCloseButton: function() {
             if (this.options.closeButton) {
-                this.closeButton = new Element('a', {'class': 'close-button'});
+                this.closeButton = new Element('a', {
+                    'href': '#close-popin',
+                    'class': 'close-button',
+                    events: {
+                        'click': function(e){
+                            e.preventDefault();
+                            this.hide();
+                        }.bind(this)
+                    }
+                });
                 this.closeButton.inject(this.element);
             }
         },

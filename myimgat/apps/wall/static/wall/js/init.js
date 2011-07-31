@@ -4,6 +4,9 @@
 
     cropPopin: {
         var cropPopin = new CropPopin('crop-popin');
+        cropPopin.addEvent('tabChange', function(){
+            console.log(this, arguments);
+        });
     }
 
     albumsRequest: {
@@ -60,7 +63,7 @@
                                 this.addClass('error');
                             }.bind(placeholder),
 
-                            'dblclick': cropPopin.show.bind(this)
+                            'dblclick': cropPopin.show.bind(cropPopin)
                         });
 
                         img.set('src', image.thumbnail);
@@ -82,7 +85,7 @@
 
     popin: {
         if (!settings.authUsername && !urlUsername) {
-            var popin = new Popin('simple-popin');
+            var popin = new Popin('simple-popin', {closeButton: false});
             popin.show('login');
         }
     }
