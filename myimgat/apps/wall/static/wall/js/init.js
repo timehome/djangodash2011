@@ -4,8 +4,10 @@
 
     cropPopin: {
         var cropPopin = new CropPopin('crop-popin');
-        cropPopin.addEvent('tabChange', function(){
-            console.log(this, arguments);
+        cropPopin.addEvent('onCropActive', function(image){
+            this.element.getElement('h2').set('text', image.title);
+            var photo = this.element.getElement('.photo');
+            photo.empty().grab(new Element('img', {src: image.crop_url}));
         });
     }
 
@@ -28,7 +30,6 @@
     wall: {
         var navigation = headerElement.getElement('nav.albums');
         var images = [];
-        //var albumsFirstIndexes = {};
 
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
@@ -51,19 +52,21 @@
                     for (var i = 0, l = items.length; i < l; i++) {
                         var placeholder = items[i].node;
                         var image = images[counterFluid % images.length];
-                        var img = new Element('img');
+                        var img = new Element('img', {
+                            events: {
+                                'load':function(){
+                                    this.addClass('success');
+                                }.bind(placeholder),
 
-                        img.addEvents({
-                            'load':function(){
-                                this.addClass('success');
-                            }.bind(placeholder),
+                                'error': function(){
+                                    this.grab(document.createTextNode(':( was not possible to load this image'));
+                                    this.addClass('error');
+                                }.bind(placeholder),
 
-                            'error': function(){
-                                this.grab(document.createTextNode(':( was not possible to load this image'));
-                                this.addClass('error');
-                            }.bind(placeholder),
-
-                            'dblclick': cropPopin.show.bind(cropPopin)
+                                'dblclick': function(image){
+                                    this.show('crop').fireEvent('cropActive', [image]);
+                                }.bind(cropPopin, image)
+                            }
                         });
 
                         img.set('src', image.thumbnail);

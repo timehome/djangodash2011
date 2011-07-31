@@ -8,10 +8,18 @@
                 this.showTab(tab);
             }
             this.element.addClass('show');
+            return this;
         },
 
         hide: function() {
             this.element.removeClass('show');
+            return this;
+        }
+    });
+
+    var CropPopinTab = global.CropPopinTab = new Class({
+        activate: function(){
+            console.log(this, arguments);
         }
     });
 
