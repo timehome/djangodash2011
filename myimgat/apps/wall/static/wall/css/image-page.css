@@ -17,7 +17,7 @@ h2 {
 }
 
 .cropped-image {
-    margin: 40px auto;
+    margin: 30px auto 50px auto;
     display: block;
     border: #333 solid 4px;
     border-radius: 4px;

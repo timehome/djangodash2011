@@ -1,0 +1,13 @@
+.socials {
+    overflow: hidden;
+    padding: 3px 0;
+}
+
+.socials .social-item {
+    margin-right: 12px;
+    float: left;
+}
+
+.socials .social-item.twitter {
+    padding-top: 2px;
+}
