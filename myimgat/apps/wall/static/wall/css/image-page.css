@@ -1,0 +1,21 @@
+header {
+    position: static;
+}
+
+.content {
+    padding: 20px;
+    width: 600px;
+    margin: 0 auto;
+}
+h2 {
+    padding-bottom: 20px;
+}
+
+.cropped-image {
+    margin: 40px auto;
+    display: block;
+    border: #333 solid 4px;
+    border-radius: 4px;
+}
+
+
