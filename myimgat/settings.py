@@ -199,6 +199,9 @@ FACEBOOK_APP_ID = '211101618942268'
 FACEBOOK_API_SECRET = 'c462511f5ca9feb2aa193f15ccd2f1b1'
 FACEBOOK_EXTENDED_PERMISSIONS = ['publish_stream', 'user_photos', 'user_status', 'read_friendlists']
 
+FLICKR_API_KEY = '2c19f890c9260c0dbcd2c681e180cf8c'
+FLICKR_API_SECRET = '862b05da4b4db7c6'
+
 LOGIN_URL = '/'
 LOGIN_ERROR_URL = '/login_error/'
 
