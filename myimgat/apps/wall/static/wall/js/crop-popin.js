@@ -17,11 +17,5 @@
         }
     });
 
-    var CropPopinTab = global.CropPopinTab = new Class({
-        activate: function(){
-            console.log(this, arguments);
-        }
-    });
-
 }(this, document.id));
 

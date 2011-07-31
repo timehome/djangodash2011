@@ -6,8 +6,31 @@
         var cropPopin = new CropPopin('crop-popin');
         cropPopin.addEvent('onCropActive', function(image){
             this.element.getElement('h2').set('text', image.title);
-            var photo = this.element.getElement('.photo');
-            photo.empty().grab(new Element('img', {src: image.crop_url}));
+            var photoContainer = this.element.getElement('.photo');
+            var photo = new Element('img', {
+                events: {
+                    load: function(){
+                        var size = this.getSize();
+                        var top = Math.round(size.y / 2) - 50;
+                        var left = Math.round(size.x / 2) - 50;
+
+                        new Lasso.Crop(this, {
+                            preset: [left, top, left + 100, top + 100],
+                            min: [50, 50],
+                            color: '#ddd',
+                            border: '/static/wall/img/crop.gif',
+                            onStart: function(){
+                                console.log(this, arguments);
+                            },
+                            onResize: function(){
+                                //console.log(this, arguments);
+                            }
+                        });
+                    }
+                }
+            });
+            photo.set('src', image.crop_url);
+            photoContainer.empty().grab(photo);
         });
     }
 
