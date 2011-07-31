@@ -15,7 +15,7 @@ def format_url(url):
 
 class FacebookImageProvider(ImageProvider):
     def __init__(self, username, token=None):
-        super(FacebookProvider, self).__init__()
+        super(FacebookImageProvider, self).__init__()
         self.username = username
         self.token = token
         if not self.token:
