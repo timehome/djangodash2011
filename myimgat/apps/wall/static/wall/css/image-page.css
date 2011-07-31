@@ -23,4 +23,7 @@ h2 {
     border-radius: 4px;
 }
 
+#crop-popin{
+    display: none;
+}
 
