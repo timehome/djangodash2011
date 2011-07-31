@@ -26,6 +26,7 @@
             this.embedComments = this.element.getElement('span.comment-page');
             this.socials = this.element.getElement('div.socials');
             this.cropContainer = this.element.getElement('div.crop-image-container');
+            this.preview = this.element.getElement('div.preview');
         },
 
         bindEvents: function() {
@@ -40,6 +41,7 @@
             data[this.token.get('name')] = this.token.get('value');
             this.request.addEvent('success', function(url) {
                 var shareUrl = 'http://myimg.at/shared_photo/' + self.image.id;
+                new Element('img', {src: url}).inject(self.preview.empty());
                 self.cropContainer.morph({height: 0});
                 self.croppedLink.set('href', url);
                 self.croppedLink.set('text', self.image.title);
@@ -54,9 +56,7 @@
                 var fbSend = '<div class="social-item"><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:send href="' + shareUrl + '" font="arial"></fb:send></div>';
 
                 self.socials.set('html', twitter + gplus + fbLike + fbSend);
-
                 gapi.plusone.go();
-
                 self.shareArea.fade('in');
             }).post(data);
         },
