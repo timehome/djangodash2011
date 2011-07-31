@@ -43,6 +43,7 @@ class FacebookImageProvider(ImageProvider):
 
         api = GraphAPI(self.token)
 
+        photos = []
         result = api.request(url)
         until_re = re.compile('until=(\d+)')
 
@@ -51,14 +52,20 @@ class FacebookImageProvider(ImageProvider):
                 image_url = self.get_absolute_url(item['source'])
                 thumb = self.get_thumb_url(item['source'])
                 server = '%d' in self.thumbor_server and self.thumbor_server % random.choice([1,2,3]) or self.thumbor_server
-                photo = Photo(url=image_url, title=item['name'], thumbnail=join(server.rstrip('/'), thumb.lstrip('/')),
+                photo = Photo(url=image_url, title='name' in item and item['name'] or '',
+                          thumbnail=join(server.rstrip('/'), thumb.lstrip('/')),
                           width=int(item['width']), height=int(item['height']))
-                album.photos.append(photo)
+                photos.append(photo)
  
             if 'paging' in result:
-                until = until_re.search(result['paging']['next']).groups()[0]
-                result = api.request(url, {'limit': 25, 'until': until})
+                match = until_re.search(result['paging']['next'])
+                if match:
+                    until = match.groups()[0]
+                    result = api.request(url, {'limit': 25, 'until': until})
+                else:
+                    result = None
             else:
                 result = None
+        return photos
 
 
