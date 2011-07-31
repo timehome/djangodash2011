@@ -4,8 +4,33 @@
 
     cropPopin: {
         var cropPopin = new CropPopin('crop-popin');
-        cropPopin.addEvent('tabChange', function(){
-            console.log(this, arguments);
+        cropPopin.addEvent('onCropActive', function(image){
+            this.element.getElement('h2').set('text', image.title);
+            var photoContainer = this.element.getElement('.photo');
+            var photo = new Element('img', {
+                events: {
+                    load: function(){
+                        var size = this.getSize();
+                        var top = Math.round(size.y / 2) - 50;
+                        var left = Math.round(size.x / 2) - 50;
+
+                        new Lasso.Crop(this, {
+                            preset: [left, top, left + 100, top + 100],
+                            min: [50, 50],
+                            color: '#ddd',
+                            border: '/static/wall/img/crop.gif',
+                            onStart: function(){
+                                console.log(this, arguments);
+                            },
+                            onResize: function(){
+                                //console.log(this, arguments);
+                            }
+                        });
+                    }
+                }
+            });
+            photo.set('src', image.crop_url);
+            photoContainer.empty().grab(photo);
         });
     }
 
@@ -28,7 +53,6 @@
     wall: {
         var navigation = headerElement.getElement('nav.albums');
         var images = [];
-        //var albumsFirstIndexes = {};
 
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
@@ -51,19 +75,21 @@
                     for (var i = 0, l = items.length; i < l; i++) {
                         var placeholder = items[i].node;
                         var image = images[counterFluid % images.length];
-                        var img = new Element('img');
+                        var img = new Element('img', {
+                            events: {
+                                'load':function(){
+                                    this.addClass('success');
+                                }.bind(placeholder),
 
-                        img.addEvents({
-                            'load':function(){
-                                this.addClass('success');
-                            }.bind(placeholder),
+                                'error': function(){
+                                    this.grab(document.createTextNode(':( was not possible to load this image'));
+                                    this.addClass('error');
+                                }.bind(placeholder),
 
-                            'error': function(){
-                                this.grab(document.createTextNode(':( was not possible to load this image'));
-                                this.addClass('error');
-                            }.bind(placeholder),
-
-                            'dblclick': cropPopin.show.bind(cropPopin)
+                                'dblclick': function(image){
+                                    this.show('crop').fireEvent('cropActive', [image]);
+                                }.bind(cropPopin, image)
+                            }
                         });
 
                         img.set('src', image.thumbnail);

@@ -173,7 +173,7 @@ DEFAULT_THUMB_SIZE = (128, 128)
 # social_auth specific configs
 AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.twitter.TwitterBackend',
-    #'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.facebook.FacebookBackend',
     #'social_auth.backends.google.GoogleOAuthBackend',
     #'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.google.GoogleBackend',
@@ -203,6 +203,8 @@ FLICKR_API_KEY = '2c19f890c9260c0dbcd2c681e180cf8c'
 FLICKR_API_SECRET = '862b05da4b4db7c6'
 
 LOGIN_URL = '/'
+LOGIN_ERROR_URL = '/login_error/'
+
 # end of social_auth specifc config
 
 

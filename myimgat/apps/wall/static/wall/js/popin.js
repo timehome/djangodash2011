@@ -35,14 +35,17 @@
                 this.showTab(tab);
             }
             this.element.fade('hide').fade('in');
+            return this;
         },
 
         hide: function() {
             this.element.fade('out');
+            return this;
         },
 
         hideTabs: function() {
             this.tabs.removeClass('show');
+            return this;
         },
 
         showTab: function(tab) {
@@ -50,6 +53,7 @@
             var tabElement = this.element.getElement('> .'+ tab);
             tabElement.addClass('show');
             this.fireEvent('tabChange', [tabElement, tab]);
+            return this;
         }
     });
 
