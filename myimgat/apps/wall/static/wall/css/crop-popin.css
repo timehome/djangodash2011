@@ -57,6 +57,8 @@
     border-bottom: 2px solid #ab17a4;
 }
 
-
+.crop-popin .crop .share-details {
+    visibility: hidden;
+}
 
 

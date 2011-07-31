@@ -19,6 +19,7 @@
             this.shareButton = this.element.getElement('.share-button');
             this.token = this.element.getElement('[name="csrfmiddlewaretoken"]');
             this.shareButton.addEvent('click', this.share.bind(this));
+            this.shareArea = this.element.getElement('div.share-details');
             this.croppedLink = this.element.getElement('a.url');
             this.embedURL = this.element.getElement('span.url');
             this.embedTitle = this.element.getElement('span.title');
@@ -32,12 +33,13 @@
             data["id"] = this.image.id;
             data[this.token.get('name')] = this.token.get('value');
             this.request.addEvent('success', function(url) {
+                self.shareArea.fade('out');
                 self.croppedLink.set('href', url);
                 self.croppedLink.set('text', self.image.title);
                 self.embedURL.set('text', url);
                 self.embedTitle.set('text', self.image.title);
                 self.embedComments.set('text', 'http://myimg.at/shared_photo/' + self.image.id);
-
+                self.shareArea.fade('in');
             }).post(data);
         },
 
