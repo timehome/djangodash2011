@@ -148,5 +148,5 @@ class CroppedPhoto(models.Model):
         return md5(url).hexdigest()
 
     def get_absolute_url(self):
-        return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.'))
+        return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.').lower())
 
