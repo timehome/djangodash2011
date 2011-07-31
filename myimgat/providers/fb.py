@@ -19,7 +19,7 @@ class FacebookImageProvider(ImageProvider):
         self.username = username
         self.token = token
         if not self.token:
-            user_auth = UserSocialAuth.objects.get(username=self.username)
+            user_auth = UserSocialAuth.objects.get(user__username=self.username)
             self.token = user_auth.extra_data['access_token']
 
     def load_albums(self):

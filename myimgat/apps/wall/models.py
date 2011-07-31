@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+from social_auth.models import UserSocialAuth
 from social_auth.backends.facebook import FacebookBackend
 from social_auth.backends.google import GoogleBackend
 
@@ -33,14 +34,18 @@ class Provider(models.Model):
 
 def create_provider(provider_type):
     def _create_provider(sender, instance, created, **kwargs):
-        if created:
+        import pdb; pdb.set_trace()
+        if created and provider_type.lower() == instance.provider.lower():
             Provider.objects.create(user=instance.user, provider_name=provider_type,
                     update_at=datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL))
         return True
     return _create_provider
 
-post_save.connect(create_provider("Facebook"), sender=FacebookBackend)
-post_save.connect(create_provider("Google"), sender=GoogleBackend)
+facebook_post_save = create_provider("Facebook")
+google_post_save = create_provider("Google")
+
+post_save.connect(facebook_post_save, sender=UserSocialAuth)
+post_save.connect(google_post_save, sender=UserSocialAuth)
 
 class ProvidersHelper(object):
     def get_username_and_providers(self, username):
