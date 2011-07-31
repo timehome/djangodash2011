@@ -4,6 +4,7 @@
         Extends: Popin,
 
         show: function(tab) {
+            this.fireEvent('show');
             if (tab) {
                 this.showTab(tab);
             }
@@ -12,7 +13,7 @@
         },
 
         hide: function() {
-            this.element.removeClass('show');
+            this.fireEvent('hide').element.removeClass('show');
             return this;
         }
     });

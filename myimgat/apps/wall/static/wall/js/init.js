@@ -3,7 +3,11 @@
     var headerElement = $('header');
 
     cropPopin: {
-        var cropPopin = new CropPopin('crop-popin');
+        var cropPopin = new CropPopin('crop-popin', {
+            onHide: function(){
+                overlay.hide();
+            }
+        });
         cropPopin.addEvent('onCropActive', function(image){
             this.element.getElement('h2').set('text', image.title);
             var photoContainer = this.element.getElement('.photo');
@@ -25,7 +29,7 @@
                             handleColor: '#ccc',
                             cropBorder: 'dashed 1px #000',
                             onComplete: function(){
-                                console.log(this, arguments);
+                                //console.log(this, arguments);
                             }
                         });
                     }
@@ -89,6 +93,7 @@
 
                                 'dblclick': function(image){
                                     this.show('crop').fireEvent('cropActive', [image]);
+                                    overlay.show();
                                 }.bind(cropPopin, image)
                             }
                         });
@@ -107,7 +112,11 @@
     request.get();
 
     overlay: {
-        var overlay = new Overlay();
+        var overlay = new Overlay({
+            onClose: function(){
+                cropPopin.hide();
+            }
+        });
     }
 
     popin: {
