@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 
 from providers.base import format_url
 
-from models import AlbumProxy, PhotoProxy, Photo, CroppedPhoto
+from models import AlbumProxy, PhotoProxy, Photo, CroppedPhoto, Provider
 
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
 THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://%d.thby.nl')
@@ -69,6 +69,11 @@ def albums(request, username=None, extension="json"):
             })
         data.append(album_data)
     data = dumps(data)
+
+    providers = Provider.objects.filter(username=request.user.username)
+    for provider in providers:
+        provider.mark_as_updated()
+        provider.save()
 
     if extension == "json":
         return HttpResponse(data, mimetype="application/json")
