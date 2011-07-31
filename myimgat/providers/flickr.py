@@ -117,7 +117,7 @@ class FlickrProvider(ImageProvider):
             'page': 1
         }
 
-        result = urlopen(url).read()
+        result = urlopen(page_url).read()
         result = loads(result)
 
         def parse_results(items):
@@ -139,7 +139,7 @@ class FlickrProvider(ImageProvider):
             for page in range(total_pages - 1):
                 page_url = url % {
                     'api_key': settings.FLICKR_API_KEY,
-                    'photoset_id': album.identifier,
+                    'user_id': self.user_id,
                     'page': page + 1
                 }
 

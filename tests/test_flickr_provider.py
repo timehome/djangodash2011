@@ -30,14 +30,9 @@ def test_albums_can_load_their_photos():
     for album in albums:
         provider.load_photos(album=album)
 
-    for photo in album.photos:
-        assert photo.title
-        assert photo.url
-        assert photo.thumbnail
-        print photo.url
-        print photo.thumbnail
-
-
-
+        for photo in album.photos:
+            assert photo.title
+            assert photo.url
+            assert photo.thumbnail
 
 
