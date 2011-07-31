@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url('^$', index),
 
     url('^api/(?P<username>[\w.]+).(?P<extension>(json|jsonp))$', albums),
+    url('^api/shorten/?$', albums),
 
     url('^(?P<object_id>\d+)[.](?:jpe?g|gif|png)$', object_detail, {
             'queryset': CroppedPhoto.objects.all(),

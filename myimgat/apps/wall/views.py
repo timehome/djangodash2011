@@ -9,7 +9,7 @@ from django.http import Http404, HttpResponse
 
 from providers.base import format_url
 
-from models import AlbumProxy, PhotoProxy
+from models import AlbumProxy, PhotoProxy, Photo, CroppedPhoto
 
 DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
 THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://%d.thby.nl')
@@ -57,3 +57,28 @@ def albums(request, username=None, extension="json"):
         return HttpResponse('albums_loaded(%s)' % data, mimetype="application/json")
     else:
         raise Http404
+
+@load_username
+def save_cropped_photo(request):
+    identifier = request.POST['id']
+    photo = Photo.objects.get(int(identifier))
+
+    left = request.POST['left']
+    top = request.POST['top']
+    width = request.POST['width']
+    height = request.POST['height']
+
+    url = '/unsafe/%dx%d:%dx%d/smart/%s' % (
+        int(left),
+        int(top),
+        int(left) + int(width),
+        int(top) + int(height),
+        photo.url
+    )
+
+    cropped = CroppedPhoto.objects.create(
+        original_photo=photo,
+        url=url
+    )
+
+    return cropped.get_absolute_url()
