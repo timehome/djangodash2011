@@ -1,10 +1,10 @@
 <div id="simple-popin" class="simple-popin popin">
     <div class="login">
-        <p>Show, see, crop and share your photos easily!</p>
+        <h2>Show, see, crop and share your photos easily!</h2>
         <p>Choose your log-in option:</p>
         <ul>
-            <li><a href="{% url socialauth_begin "facebook" %}">facebook</a></li>
-            <li><a href="{% url socialauth_begin "google" %}">google</a></li>
+            <li class="fb"><a title="Facebook" href="{% url socialauth_begin "facebook" %}">facebook</a></li>
+            <li class="go"><a title="Google" href="{% url socialauth_begin "google" %}">google</a></li>
         </ul>
     </div>
 </div>

@@ -6,6 +6,7 @@
     <link href="{{ STATIC_URL }}wall/css/header.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/overlay.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/popin.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}wall/css/login-popin.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/crop-popin.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/wall.css" rel="stylesheet" type="text/css" />
     {% endblock %}
@@ -48,7 +49,7 @@
         settings = this.settings || {};
         settings.defaultUsername = '{{ username }}';
         settings.urls = {
-        shorten: '{% url wall.views.save_cropped_photo %}',
+            shorten: '{% url wall.views.save_cropped_photo %}',
             userAlbums: '/api/{username}.json'
         };
     </script>
