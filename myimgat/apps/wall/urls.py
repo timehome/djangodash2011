@@ -15,8 +15,6 @@ urlpatterns = patterns('',
     url('^api/(?P<username>[\w._-]+).(?P<extension>(json|jsonp))$', albums),
     url('^(?P<image_hash>.+?)[.](?:jpe?g|gif|png|JPE?G|GIF|PNG)$', shortened_url),
 
-    url('^(?P<username>[\w._-]+)$', index),
-
     url('^photo/(?P<object_id>\d+)$', object_detail, {
             'queryset': Photo.objects.all(),
             'template_object_name': 'photo',
@@ -25,6 +23,8 @@ urlpatterns = patterns('',
     url('^shared_photo/(?P<object_id>\d+)$', object_detail, {
             'queryset': CroppedPhoto.objects.all(),
             'template_object_name': 'photo',
+            'template_name': "wall/croppedphoto_detail.html",
         }, name="photo_url"),
 
+    url('^(?P<username>[\w._-]+)$', index),
 )
