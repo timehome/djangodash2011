@@ -29,9 +29,9 @@
 
     <img class="cropped-image" src="http://thby.nl{{ photo.url }}" alt="{{ photo.original_photo.title }}" />
 
-    <div>
+    <div class="socials">
         <div class="social-item twitter">
-            <a target="_blank" title="tweet this image" href="http://twitter.com/share?url=http://myimg.at/shared_photo/{{ photo.id }}&via=myimgat&text={{ photo.original_photo.title }}" class="twitter-share-button"><img src="/static/wall/img/tweetn.png" alt="tweet this image" /></a>
+            <a target="_blank" title="tweet this image" href="http://twitter.com/share?url=http://myimg.at/shared_photo/{{ photo.id }}&via=myimgat&text={{ photo.original_photo.title }}" class="twitter-share-button"><img src="{{ STATIC_URL }}wall/img/tweetn.png" alt="tweet this image" /></a>
         </div>
         <div class="social-item">
             <g:plusone href="http://myimg.at/shared_photo/{{ photo.id }}"></g:plusone>

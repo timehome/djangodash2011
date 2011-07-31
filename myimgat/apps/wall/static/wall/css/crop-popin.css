@@ -95,20 +95,6 @@
     padding: 10px;
 }
 
-.crop-popin .socials {
-    overflow: hidden;
-    padding: 3px 0;
-}
-
-.crop-popin .social-item {
-    margin-right: 12px;
-    float: left;
-}
-
-.crop-popin .social-item.twitter {
-    padding-top: 2px;
-}
-
 .crop-popin .back {
     overflow: hidden;
     padding-top: 8px;
