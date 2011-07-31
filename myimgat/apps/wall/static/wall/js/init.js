@@ -14,24 +14,18 @@
             var photo = new Element('img', {
                 events: {
                     load: function(){
-                        var size = this.getSize();
-                        new MooCrop(this, {
-                            initialCrop: {
-                                top: 0,
-                                left: 0,
-                                width: size.x - 2,
-                                height: size.y - 2 
-                            },
+                        var moocrop = new MooCrop(this, {
                             min: {width: 50, height: 50},
                             maskColor: '#ddd',
                             maskOpacity: 0.2,
                             constrainRatio: false,
                             handleColor: '#ccc',
                             cropBorder: 'dashed 1px #000',
-                            onComplete: function(){
-
+                            onComplete: function(a, info){
+                                cropPopin.shareButton.store('crop-info', info);
                             }
                         });
+                        cropPopin.shareButton.store('crop-info', moocrop.getCropInfo());
                     }
                 }
             });
