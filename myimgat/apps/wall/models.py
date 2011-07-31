@@ -34,7 +34,6 @@ class Provider(models.Model):
 
 def create_provider(provider_type):
     def _create_provider(sender, instance, created, **kwargs):
-        import pdb; pdb.set_trace()
         if created and provider_type.lower() == instance.provider.lower():
             Provider.objects.create(user=instance.user, provider_name=provider_type,
                     update_at=datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL))
@@ -85,7 +84,7 @@ class Album(models.Model):
     username = models.CharField(default="", blank=True, max_length=100, db_index=True)
     identifier = models.CharField(max_length=200, db_index=True)
     url = models.CharField(max_length=300, null=True, blank=True, db_index=True)
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=4000, null=True, blank=True)
 
 class AlbumProxy(Album):
     objects = AlbumManager()
@@ -118,7 +117,7 @@ class PhotoManager(models.Manager, ProvidersHelper):
 
 
 class Photo(models.Model):
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=4000, null=True, blank=True)
     url = models.CharField(max_length=500, db_index=True)
     thumbnail = models.CharField(max_length=500, db_index=True)
     album = models.ForeignKey(Album, related_name="photos")
