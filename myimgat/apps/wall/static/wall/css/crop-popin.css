@@ -3,9 +3,9 @@
     z-index: 101;
     top: 100%;
     left: 50%;
-    width: 800px;
+    width: 640px;
     height: 800px;
-    margin-left: -400px;
+    margin-left: -320px;
     opacity: 0;
 
     -webkit-transition: all 600ms ease-in-out;
@@ -13,9 +13,14 @@
 
 .crop-popin.show {
     opacity: 1;
-    top: 20%;
+    top: 10%;
 }
 
 .crop-popin > div {
     padding: 20px;
 }
+
+.crop-popin .crop h2 {
+    padding-bottom: 16px;
+}
+

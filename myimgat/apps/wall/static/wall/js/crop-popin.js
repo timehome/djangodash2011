@@ -8,10 +8,12 @@
                 this.showTab(tab);
             }
             this.element.addClass('show');
+            return this;
         },
 
         hide: function() {
             this.element.removeClass('show');
+            return this;
         }
     });
 
