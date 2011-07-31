@@ -2,6 +2,9 @@
     color: #333;
     padding: 20px;
 }
+.popin .login p {
+    padding: 20px 0 12px 0;
+}
 .popin .login ul {
     overflow: hidden;
 }
