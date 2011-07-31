@@ -104,6 +104,10 @@ class PhotoManager(models.Manager, ProvidersHelper):
         photos = Photo.objects.filter(album=album)
         if not force_update:
             providers = filter(lambda p: p.is_expired(), providers)
+
+        if not providers and not photos:
+            providers = [Provider(provider_name='Google')]
+
         if not photos or force_update or providers:
             photos = []
             for provider in providers:
@@ -153,5 +157,5 @@ class CroppedPhoto(models.Model):
         return md5(url).hexdigest()
 
     def get_absolute_url(self):
-        return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.'))
+        return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.').lower())
 
