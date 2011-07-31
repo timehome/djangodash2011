@@ -11,7 +11,7 @@
         },
 
         createRequest: function(){
-            this.request = new Request({
+            this.request = new Request.JSON({
                 url: settings.urls.shorten
             });
         },
@@ -41,21 +41,21 @@
             var data = Object.clone(this.shareButton.retrieve('crop-info'));
             data["id"] = this.image.id;
             data[this.token.get('name')] = this.token.get('value');
-            this.request.addEvent('success', function(url) {
-                var shareUrl = 'http://myimg.at/shared_photo/' + self.image.id;
-                new Element('img', {src: url}).inject(self.preview.empty());
+            this.request.addEvent('success', function(response) {
+                var shareUrl = 'http://myimg.at/shared_photo/' + response.crop_id;
+                new Element('img', {src: response.url}).inject(self.preview.empty());
 
                 self.cropContainer.morph({height: 0});
 
-                self.croppedLink.set('href', url);
+                self.croppedLink.set('href', shareUrl);
                 self.croppedLink.set('text', self.image.title);
-                self.embedURL.set('text', url);
+                self.embedURL.set('text', response.url);
                 self.embedTitle.set('text', self.image.title);
                 self.embedComments.set('text', shareUrl);
                 self.socials.empty();
 
                 var twitter = '<div class="social-item twitter"><a target="_blank" title="tweet this image" href="http://twitter.com/share?url=' + shareUrl + '&via=myimgat&text=' + self.image.title + '" class="twitter-share-button"><img src="/static/wall/img/tweetn.png" alt="tweet this image" /></a></div>';
-                var gplus = '<div class="social-item"><g:plusone href="url"></g:plusone></div>';
+                var gplus = '<div class="social-item"><g:plusone href="' + shareUrl + '"></g:plusone></div>';
                 var fbLike = '<div class="social-item"><iframe src="http://www.facebook.com/plugins/like.php?app_id=102452659856143&amp;href=' + shareUrl + '&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:24px;" allowTransparency="true"></iframe></div>';
                 var fbSend = '<div class="social-item"><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:send href="' + shareUrl + '" font="arial"></fb:send></div>';
 

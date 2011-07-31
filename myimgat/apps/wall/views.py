@@ -108,7 +108,7 @@ def save_cropped_photo(request, username=None):
         hash=CroppedPhoto.get_hash(url)
     )
 
-    return HttpResponse(request.build_absolute_uri('../' + cropped.get_absolute_url()))
+    return HttpResponse(dumps({"url": request.build_absolute_uri('../' + cropped.get_absolute_url()), "crop_id": cropped.id }), mimetype="application/json")
 
 def shortened_url(request, image_hash):
     obj = CroppedPhoto.objects.get(hash=image_hash)
