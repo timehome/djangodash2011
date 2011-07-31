@@ -148,8 +148,9 @@ class CroppedPhoto(models.Model):
     url = models.CharField(max_length=500, db_index=True)
     hash = models.CharField(max_length=200, null=True, db_index=True)
 
-    def set_hash(self):
-        self.hash = md5(self.url).hexdigest()
+    @classmethod
+    def get_hash(cls, url):
+        return md5(url).hexdigest()
 
     def get_absolute_url(self):
         return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.'))

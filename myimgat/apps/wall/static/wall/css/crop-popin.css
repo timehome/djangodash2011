@@ -24,6 +24,18 @@
     padding-bottom: 12px;
 }
 
+.crop-popin .crop h3 {
+    padding-bottom: 12px;
+}
+
+.crop-popin .crop p {
+    margin-bottom: 12px;
+}
+
+.crop-popin .crop .crop-image-container {
+    overflow: hidden;
+}
+
 .crop-popin .crop .photo {
     margin-bottom: 16px;
 }
@@ -59,14 +71,39 @@
 
 .crop-popin .crop .share-details {
     visibility: hidden;
+    padding-top: 12px;
+}
+
+.crop-popin .crop .preview img {
+    display: block;
+    margin: 0 auto;
+    border: #333 solid 4px;
+    border-radius: 4px;
 }
 
 .markup {
     font-family: courier;
     font-size: 13px;
     background-color: #333;
-    color: white;
+    color: #fff;
     width: 580px;
     height: 78px;
     padding: 10px;
+}
+
+.socials {
+    overflow: hidden;
+}
+
+.social-item {
+    margin-right: 12px;
+    float: left;
+}
+
+.social-item.twitter {
+    padding-top: 2px;
+}
+
+#___plusone_0 {
+    width: 38px !important;
 }

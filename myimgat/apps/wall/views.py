@@ -102,13 +102,11 @@ def save_cropped_photo(request, username=None):
         fake_original
     )
 
-    cropped = CroppedPhoto.objects.create(
+    cropped, created = CroppedPhoto.objects.get_or_create(
         original_photo=photo,
-        url=url
+        url=url,
+        hash=CroppedPhoto.get_hash(url)
     )
-
-    cropped.set_hash()
-    cropped.save()
 
     return HttpResponse(request.build_absolute_uri('../' + cropped.get_absolute_url()))
 
