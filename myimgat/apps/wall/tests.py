@@ -80,6 +80,14 @@ class CroppedPhotoAbsoluteUrlsAndViews(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+    def test_post_new_crop(self):
+        response = self.client.post('/shared_photo/1', {
+            'left': 0, 
+            'top': 0, 
+            'right': 200,
+            'bottom': 200 
+        })
+
 class TestTampletaTag(TestCase):
     def setUp(self):
         settings.THUMBOR_SERVER = "http://thby.nl"
@@ -90,4 +98,3 @@ class TestTampletaTag(TestCase):
     def test_creatin_url(self):
         self.assertEqual("http://thby.nl/unsafe/100x100/myimgurl.jpg",
                             self.render('{% thumbor_url_unsafe "https://myimgurl.jpg" "100x100" %}'))
-

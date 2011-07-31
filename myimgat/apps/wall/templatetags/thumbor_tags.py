@@ -2,7 +2,7 @@ from django import template
 from django.conf import settings
 
 from libthumbor import CryptoURL
-from providers.google import format_url
+from providers.base import format_url
 
 THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY', 'my-security-key')
 THUMBOR_SERVER = getattr(settings, "THUMBOR_SERVER", 'http://%d.thby.nl')
