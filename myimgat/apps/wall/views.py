@@ -7,7 +7,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 
-from providers.google import format_url
+from providers.base import format_url
 
 from models import AlbumProxy, PhotoProxy
 
