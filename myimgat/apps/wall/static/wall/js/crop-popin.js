@@ -66,6 +66,8 @@
             if (tab) {
                 this.showTab(tab);
             }
+            this.preview.empty();
+            this.cropContainer.setStyle('height', 'auto');
             this.element.addClass('show');
             this.shareArea.fade('out');
             return this;

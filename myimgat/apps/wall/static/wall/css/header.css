@@ -28,7 +28,6 @@ header h1 {
     text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff;
     padding:  0 14px 8px 0;
     margin-right: 14px;
-    border-right: 1px solid #474747;
 }
 header h1:hover {
     text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff,

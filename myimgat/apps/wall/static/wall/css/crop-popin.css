@@ -71,11 +71,14 @@
 
 .crop-popin .crop .share-details {
     visibility: hidden;
+    padding-top: 12px;
 }
 
 .crop-popin .crop .preview img {
     display: block;
     margin: 0 auto;
+    border: #333 solid 4px;
+    border-radius: 4px;
 }
 
 .markup {

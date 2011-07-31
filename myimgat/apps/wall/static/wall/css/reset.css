@@ -5,10 +5,7 @@ html, body, h1, h2, h3, h4, h5, h6, ul, ol, p {
     padding: 0;
     margin: 0;
 }
-body {
-    background: #ddd;
-    font-family: arial,helvetica,freesans,sans-serif;
-}
 ul, ol{
     list-style: none;
 }
+

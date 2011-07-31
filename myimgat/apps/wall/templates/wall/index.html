@@ -9,7 +9,7 @@
     </script>
 
     {% for association in still_unassociated %}
-    <span class="{{ association.class }}"><a href="{{ association.url }}">{{ association.label }}</a></span>
+        <a class="{{ association.class }}" href="{{ association.url }}">{{ association.label }}</a>
     {% endfor %}
 
     <span>{{ username }}</span>
