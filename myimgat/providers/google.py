@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import logging
 from os.path import join
 import random
 
@@ -8,6 +8,7 @@ import gdata.photos.service
 import gdata.media
 import gdata.geo
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from myimgat.providers.base import ImageProvider, Album, Photo
 
@@ -16,7 +17,11 @@ THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY', 'my-security-ke
 class GoogleImageProvider(ImageProvider):
     def __init__(self, username, thumb_size=(128,128)):
         super(GoogleImageProvider, self).__init__(thumb_size)
-        self.username = username
+        try:
+            self.user = User.objects.get(username=username)
+            self.username = self.user.email.split('@')[0]
+        except User.DoesNotExist:
+            self.username = username
 
     def load_albums(self):
         parsed_albums = []
@@ -26,7 +31,8 @@ class GoogleImageProvider(ImageProvider):
             for album in albums.entry:
                 parsed_album = Album(identifier=album.gphoto_id.text, url=album.id.text, title=album.title.text)
                 parsed_albums.append(parsed_album)
-        except gdata.photos.service.GooglePhotosException:
+        except gdata.photos.service.GooglePhotosException, e:
+            logging.error("[GOOGLE PROVIDER] " + e.message)
             return []
 
         return parsed_albums
