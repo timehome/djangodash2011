@@ -39,11 +39,6 @@
         <div class="social-item">
             <iframe src="http://www.facebook.com/plugins/like.php?app_id=102452659856143&amp;href=http://myimg.at/shared_photo/{{ photo.id }}&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:24px;" allowTransparency="true"></iframe>
         </div>
-        <div class="social-item">
-            <div id="fb-root"></div>
-            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-            <fb:send href="http://myimg.at/shared_photo/{{ photo.id }}" font="arial"></fb:send>
-        </div>
     </div>
 
     <div id="disqus_thread"></div>
@@ -63,4 +58,8 @@
 {% endblock %}
 
 {% block js %}
+{% endblock %}
+
+{% block js_bottom %}
+<script>gapi.plusone.go();</script>
 {% endblock %}
