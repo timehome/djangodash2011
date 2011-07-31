@@ -23,9 +23,9 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'storage.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'myimgat',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
@@ -163,7 +163,7 @@ DEFAULT_USER_WALL = 'heynemann'
 
 # django-nose app settings
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=.', '--cover-inclusive', '.']
+NOSE_ARGS = ['-v', '-s', '--with-coverage', '--cover-erase', '--cover-package=myimgat', '--cover-inclusive', '.']
 # end of django-nose settings
 
 # provider settings
@@ -195,6 +195,11 @@ SOCIAL_AUTH_UUID_LENGTH = 16
 SOCIAL_AUTH_EXTRA_DATA = True
 SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
 
+FACEBOOK_APP_ID = '211101618942268'
+FACEBOOK_API_SECRET = 'c462511f5ca9feb2aa193f15ccd2f1b1'
+FACEBOOK_EXTENDED_PERMISSIONS = ['publish_stream', 'user_photos', 'user_status', 'read_friendlists']
+
+LOGIN_URL = '/'
 # end of social_auth specifc config
 
 
