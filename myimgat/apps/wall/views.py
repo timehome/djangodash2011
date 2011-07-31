@@ -97,7 +97,7 @@ def save_cropped_photo(request, username=None):
         fake_original
     )
 
-    cropped = CroppedPhoto.objects.get_or_create(
+    cropped, created = CroppedPhoto.objects.get_or_create(
         original_photo=photo,
         url=url,
         hash=CroppedPhoto.get_hash(url)
