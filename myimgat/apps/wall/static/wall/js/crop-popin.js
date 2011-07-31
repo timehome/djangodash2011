@@ -24,6 +24,7 @@
             this.embedURL = this.element.getElement('span.url');
             this.embedTitle = this.element.getElement('span.title');
             this.embedComments = this.element.getElement('span.comment-page');
+            this.socials = this.element.getElement('div.socials');
         },
 
         share: function(e) {
@@ -33,11 +34,14 @@
             data["id"] = this.image.id;
             data[this.token.get('name')] = this.token.get('value');
             this.request.addEvent('success', function(url) {
+                var shareUrl = 'http://myimg.at/shared_photo/' + self.image.id;
                 self.croppedLink.set('href', url);
                 self.croppedLink.set('text', self.image.title);
                 self.embedURL.set('text', url);
                 self.embedTitle.set('text', self.image.title);
-                self.embedComments.set('text', 'http://myimg.at/shared_photo/' + self.image.id);
+                self.embedComments.set('text', shareUrl);
+                self.socials.empty();
+                self.socials.set('html', '<a target="_blank" href="http://twitter.com/share?url=' + shareUrl + '&via=myimgat&text=' + self.image.title + '" class="twitter-share-button">tweet this image</a>');
                 self.shareArea.fade('in');
             }).post(data);
         },
