@@ -7,6 +7,11 @@
         settings = this.settings || {};
         settings.authUsername = "{{ username }}";
     </script>
+
+    {% for association in still_unassociated %}
+    <span class="{{ association.class }}"><a href="{{ association.url }}">{{ association.label }}</a></span>
+    {% endfor %}
+
     <span>{{ username }}</span>
     <a href="/logout/">logout</a>
     {% endif %}

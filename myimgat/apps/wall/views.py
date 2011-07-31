@@ -7,6 +7,7 @@ from os.path import join
 from django.conf import settings
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
+from django.core.urlresolvers import reverse
 
 from providers.base import format_url
 
@@ -28,7 +29,23 @@ def load_username(func):
 
 @load_username
 def index(request, username=None):
-    return render(request, 'wall/index.html', {'username': username})
+    still_unassociated = [
+        {
+            "class": "facebook",
+            "label": "Associate with Facebook",
+            "url": reverse("socialauth_associate_begin", args=["facebook"])
+        },
+        {
+            "class": "google",
+            "label": "Associate with Picasa",
+            "url": reverse("socialauth_associate_begin", args=["google"])
+        }
+    ]
+    if request.user.is_authenticated():
+        for social_auth in request.user.social_auth.all():
+            still_unassociated = filter(lambda x: x['class'] != social_auth.provider, still_unassociated)
+    return render(request, 'wall/index.html', {'username': username, 
+                               'still_unassociated': still_unassociated})
 
 @load_username
 def albums(request, username=None, extension="json"):
