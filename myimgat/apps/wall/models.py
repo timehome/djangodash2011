@@ -33,7 +33,6 @@ class Provider(models.Model):
 
 def create_provider(provider_type):
     def _create_provider(sender, instance, created, **kwargs):
-        print 'ooiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         if created:
             Provider.objects.create(user=instance.user, provider_name=provider_type,
                     update_at=datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL))
