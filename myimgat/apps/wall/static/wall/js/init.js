@@ -29,7 +29,7 @@
                             handleColor: '#ccc',
                             cropBorder: 'dashed 1px #000',
                             onComplete: function(){
-                                //console.log(this, arguments);
+
                             }
                         });
                     }
@@ -42,7 +42,7 @@
 
     albumsRequest: {
         var username;
-        var urlUsername = window.location.href.match(/\/([^/]+)$/);
+        var urlUsername = window.location.href.match(/\/([^/#]+)$/);
         if (urlUsername) {
             username = urlUsername = urlUsername[1];
         } else if (global.settings.authUsername) {
@@ -62,7 +62,7 @@
 
         request.addEvent('onSuccess', function(albums){
             for (var i = 0; i < albums.length; i++) {
-                navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
+                //navigation.grab(new Element('a', {href: '#', html: albums[i].title}));
                 images.push.apply(images, albums[i].photos);
             };
 
