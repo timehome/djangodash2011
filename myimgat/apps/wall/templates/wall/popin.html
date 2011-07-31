@@ -14,8 +14,9 @@
         <h2>image title</h2>
         <div class="photo"></div>
         <a class="share-button" href="#">share photo</a>
-        <h3>Share this url: <span class="url"></span></h3>
-        <h3>Embed: &lt;img src=&quot;<span class="url"></span>&quot; alt=&quot;<span class="title"></span>&quot; /&gt;</h3>
+        <h3>Share this url: <a href="#" target="_blank" class="url"></a></h3>
+        <h3>Embed:</h3>
+        <p>&lt;a href=&quot;<span class="comment-page"></span>&quot;&gt;&lt;img src=&quot;<span class="url"></span>&quot; alt=&quot;<span class="title"></span>&quot; /&gt;&lt;/a&gt;</p>
         {% csrf_token %}
     </div>
     <div class="share">
