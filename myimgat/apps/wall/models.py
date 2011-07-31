@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import logging
 from datetime import datetime, timedelta
 
 from django.db import models
@@ -22,7 +22,7 @@ DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
 providers_classes = locals()
 
 class Provider(models.Model):
-    user = models.ForeignKey(User, related_name='providers')
+    username = models.CharField(default=DEFAULT_USER_WALL, blank=True, max_length=100, db_index=True)
     provider_name = models.CharField(max_length=100)
     update_at = models.DateTimeField(auto_now_add=True)
 
@@ -35,7 +35,7 @@ class Provider(models.Model):
 def create_provider(provider_type):
     def _create_provider(sender, instance, created, **kwargs):
         if created and provider_type.lower() == instance.provider.lower():
-            Provider.objects.create(user=instance.user, provider_name=provider_type,
+            Provider.objects.create(username=instance.user.username, provider_name=provider_type,
                     update_at=datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL))
         return True
     return _create_provider
@@ -51,13 +51,9 @@ class ProvidersHelper(object):
         try:
             user = User.objects.get(username=username)
             username = user.username
-            providers = user.providers.all()
+            providers = Provider.objects.filter(username=user.username)
         except User.DoesNotExist:
-            albums = Album.objects.filter(username=username)
-            if not albums and DEFAULT_USER_WALL == username:
-                providers = [Provider(provider_name='Google', update_at=datetime.now() - timedelta(days=1))]
-            else:
-                providers = []
+            providers = [Provider(provider_name='Google', update_at=datetime.now() - timedelta(days=1))]
         return username, providers
 
 class AlbumManager(models.Manager, ProvidersHelper):
@@ -66,18 +62,21 @@ class AlbumManager(models.Manager, ProvidersHelper):
         albums = Album.objects.filter(username=username)
         if not force_update:
             providers = filter(lambda p: p.is_expired(), providers)
-        if not albums or force_update or providers:
+        if (not albums or force_update) and providers:
             albums = []
             for provider in providers:
-                remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
-                for album_base in remote_provider.load_albums():
-                    album, created = Album.objects.get_or_create(identifier=album_base.identifier, defaults={
-                        'username': username,
-                        'url': album_base.url,
-                        'title': album_base.title,
-                    })
-                    albums.append(album)
-                provider.mark_as_updated()
+                try:
+                    remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
+                    for album_base in remote_provider.load_albums():
+                        album, created = Album.objects.get_or_create(identifier=album_base.identifier, defaults={
+                            'username': username,
+                            'url': album_base.url,
+                            'title': album_base.title,
+                        })
+                        albums.append(album)
+                    provider.mark_as_updated()
+                except:
+                    logging.error("Problem on loading info from provider [%s]" % str(provider))
         return albums
 
 class Album(models.Model):
@@ -99,20 +98,23 @@ class PhotoManager(models.Manager, ProvidersHelper):
         photos = Photo.objects.filter(album=album)
         if not force_update:
             providers = filter(lambda p: p.is_expired(), providers)
-        if not photos or force_update or providers:
+        if (not photos or force_update) and providers:
             photos = []
             for provider in providers:
-                remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
-                for photo_base in remote_provider.load_photos(album):
-                    photo, created = Photo.objects.get_or_create(url=photo_base.url, defaults={
-                        'title': photo_base.title,
-                        'width': photo_base.width,
-                        'height': photo_base.height,
-                        'thumbnail': photo_base.thumbnail,
-                        'album': album,
-                    })
-                    photos.append(photo)
-                provider.mark_as_updated()
+                try:
+                    remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
+                    for photo_base in remote_provider.load_photos(album):
+                        photo, created = Photo.objects.get_or_create(url=photo_base.url, defaults={
+                            'title': photo_base.title,
+                            'width': photo_base.width,
+                            'height': photo_base.height,
+                            'thumbnail': photo_base.thumbnail,
+                            'album': album,
+                        })
+                        photos.append(photo)
+                    provider.mark_as_updated()
+                except:
+                    logging.error("Problem on loading photos from provider [%s]" % str(provider.provider_name))
         return photos 
 
 

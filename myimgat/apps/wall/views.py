@@ -44,7 +44,7 @@ def albums(request, username=None, extension="json"):
                 'url': photo.url,
                 'title': photo.title,
                 'thumbnail': photo.thumbnail,
-                'crop_url': "%s/unsafe/%s/%s" % (THUMBOR_SERVER, 'fit-in/600x500', format_url(photo.url)),
+                'crop_url': "%s/unsafe/%s/%s" % (THUMBOR_SERVER, 'fit-in/600x400', format_url(photo.url)),
                 'width': photo.width,
                 'height': photo.height
             })
