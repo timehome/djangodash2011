@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
+{% load compress %}
+
 {% block head %}
     {% block css %}
+    {% compress css %}
     <link href="{{ STATIC_URL }}wall/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/defaults.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/header.css" rel="stylesheet" type="text/css" />
@@ -11,6 +14,7 @@
     <link href="{{ STATIC_URL }}wall/css/login-popin.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/crop-popin.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}wall/css/wall.css" rel="stylesheet" type="text/css" />
+    {% endcompress %}
     {% endblock %}
 
     {% block open_graph %}
@@ -59,6 +63,7 @@
             userAlbums: '/api/{username}.json'
         };
     </script>
+    {% compress js %}
     <script src="{{ STATIC_URL }}wall/js/mootools-core-1.3.2-compat.js"></script>
     <script src="{{ STATIC_URL }}wall/js/mootools-more-1.3.2.1.js"></script>
     <script src="{{ STATIC_URL }}wall/js/wall.js"></script>
@@ -69,6 +74,7 @@
     <script src="{{ STATIC_URL }}wall/js/popin.js"></script>
     <script src="{{ STATIC_URL }}wall/js/crop-popin.js"></script>
     <script src="{{ STATIC_URL }}wall/js/init.js"></script>
+    {% endcompress %}
     {% endblock %}
 
 {% endblock %}

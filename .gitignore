@@ -12,3 +12,4 @@ dist/
 *.db
 .livereload
 *.swo
+myimgat/static/CACHE

@@ -92,6 +92,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -145,6 +146,7 @@ INSTALLED_APPS = (
     'wall',
 
     # external apps
+    'compressor',
     'shorturls',
     'social_auth',
     'south',
@@ -233,6 +235,8 @@ LOGGING = {
 
 THUMBOR_SECURITY_KEY = 'rivendell_rox'
 THUMBOR_SERVER = 'http://thby.nl'
+
+COMPRESS = True
 
 try:
     from local_settings import *
