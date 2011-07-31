@@ -70,12 +70,14 @@ def save_cropped_photo(request, username=None):
     width = request.POST['width']
     height = request.POST['height']
 
+    fake_original = "%s/unsafe/%s/%s" % (THUMBOR_SERVER, 'fit-in/600x400', format_url(photo.url))
+
     url = '/unsafe/%dx%d:%dx%d/smart/%s' % (
         int(left),
         int(top),
         int(left) + int(width),
         int(top) + int(height),
-        photo.url
+        fake_original
     )
 
     cropped = CroppedPhoto.objects.create(
