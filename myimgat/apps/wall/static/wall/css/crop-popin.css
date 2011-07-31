@@ -84,10 +84,14 @@
 }
 
 .social-item {
-    margin-right: 10px;
+    margin-right: 12px;
     float: left;
 }
 
+.social-item.twitter {
+    padding-top: 2px;
+}
+
 #___plusone_0 {
-    width: 58px !important;
+    width: 38px !important;
 }
