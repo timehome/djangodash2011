@@ -60,7 +60,7 @@ class FlickrProvider(ImageProvider):
     def load_photos(self, album):
         if album.identifier == 'default':
             self.load_default_photos(album)
-            return
+            return album.photos
 
         url = 'http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=%(api_key)s&photoset_id=%(photoset_id)s&per_page=200&page=%(page)d&format=json&nojsoncallback=1'
 
@@ -98,16 +98,7 @@ class FlickrProvider(ImageProvider):
                 result = loads(result)
                 parse_results(result)
 
-
-#{ "photoset": 
-        #{ 
-            #"id": "72157627319093982", "primary": "4646695374", "owner": "11830608@N05", "ownername": "bernardo.heynemann",
-            #"photo": [
-                  #{ "id": "4646695374", "secret": "5de3c581f4", "server": "4012", "farm": 5, "title": "pair_cups", "isprimary": 1 }
-            #], 
-            #"page": 1, "per_page": "200", "perpage": "200", "pages": 1, "total": 1 
-        #}, "stat": "ok" }
-
+        return album.photos
 
     def load_default_photos(self, album):
         url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%(api_key)s&user_id=%(user_id)s&per_page=200&page=%(page)d&format=json&nojsoncallback=1'
