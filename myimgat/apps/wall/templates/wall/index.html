@@ -1,12 +1,5 @@
 {% extends "wall/base.html" %}
 
-{#% block albums_navigation %#}
-    {% for album in albums %}
-        {% if album.photos %}
-        <a class="selected" href="#{{ album.identifier }}" title="{{ album.title }}">{{ album.title }}</a>
-        {% endif %}
-    {% endfor %}
-{#% endblock %#}
 
 {% block user_navigation %}
     {% if user.is_authenticated %}
