@@ -39,6 +39,12 @@ header h1 a{
     text-decoration: none;
 }
 
+header .hint {
+    color: #fff;
+    float: left;
+    padding: 5px 0 0 20px;
+}
+
 nav {
     overflow: hidden;
     float: left;

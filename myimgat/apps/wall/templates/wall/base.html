@@ -30,6 +30,11 @@
     {% block menu %}
     <header id="header">
         <h1>{% block header_logo %}myimg.at{% endblock %}</h1>
+
+        {% block header_hint %}
+        <div class="hint">double-click on a photo to crop and share</div>
+        {% endblock %}
+
         <nav class="albums">
         </nav>
         <nav class="user">
