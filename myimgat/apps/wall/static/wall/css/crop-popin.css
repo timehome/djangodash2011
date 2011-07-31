@@ -40,33 +40,37 @@
     margin-bottom: 16px;
 }
 
-.crop-popin .crop .share-button {
-    display: block;
-    font-size: 26px;
+.crop-popin .crop .btn1 {
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px #222;
     border-top: 2px solid #ab17a4;
     border-bottom: 2px solid #481c46;
-    padding: 12px;
-    text-align: center;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    text-shadow: 0 -1px #222;
-
     background: #8f1c93;
     background: -moz-linear-gradient(top, #8f1c93 0%, #541051 100%);
     background: -webkit-linear-gradient(top, #8f1c93 0%,#541051 100%);
     background: -o-linear-gradient(top, #8f1c93 0%,#541051 100%);
     background: -ms-linear-gradient(top, #8f1c93 0%,#541051 100%);
     background: linear-gradient(top, #8f1c93 0%,#541051 100%);
+    border-radius: 4px;
+    padding: 5px 10px;
 }
 
-.crop-popin .crop .share-button:hover {
+.crop-popin .crop .btn1:hover {
     background: #8f1c93;
 }
 
-.crop-popin .crop .share-button:active {
+.crop-popin .crop .btn1:active {
     border-top: 2px solid #481c46;
     border-bottom: 2px solid #ab17a4;
+}
+
+.crop-popin .crop .share-button {
+    display: block;
+    font-size: 26px;
+    border-radius: 8px;
+    padding: 12px;
 }
 
 .crop-popin .crop .share-details {
@@ -81,7 +85,7 @@
     border-radius: 4px;
 }
 
-.markup {
+.crop-popin .markup {
     font-family: courier;
     font-size: 13px;
     background-color: #333;
@@ -91,19 +95,25 @@
     padding: 10px;
 }
 
-.socials {
+.crop-popin .socials {
     overflow: hidden;
+    padding: 3px 0;
 }
 
-.social-item {
+.crop-popin .social-item {
     margin-right: 12px;
     float: left;
 }
 
-.social-item.twitter {
+.crop-popin .social-item.twitter {
     padding-top: 2px;
 }
 
-#___plusone_0 {
-    width: 38px !important;
+.crop-popin .back {
+    overflow: hidden;
+    padding-top: 8px;
+}
+
+.crop-popin .crop-again {
+    float: left;
 }
