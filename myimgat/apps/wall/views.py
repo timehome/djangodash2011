@@ -20,7 +20,7 @@ def load_username(func):
         if not request.user.is_authenticated():
             username = DEFAULT_USER_WALL
         else:
-            username = request.user.email.split('@')[0]
+            username = request.user.username
         kwargs['username'] = kwargs.get('username', username)
         return func(*args, **kwargs)
     return _load_username

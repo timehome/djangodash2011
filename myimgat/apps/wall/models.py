@@ -1,26 +1,84 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from datetime import datetime, timedelta
+
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+from social_auth.models import UserSocialAuth
+from social_auth.backends.facebook import FacebookBackend
+from social_auth.backends.google import GoogleBackend
 
 from myimgat.providers.google import GoogleImageProvider
+from myimgat.providers.fb import FacebookImageProvider
 
-class AlbumManager(models.Manager):
-    def load(self, username):
+UPDATE_ALBUMS_DAYS_INTERVAL = getattr(settings, 'UPDATE_ALBUMS_DAYS_INTERVAL', 1)
+DEFAULT_USER_WALL = getattr(settings, "DEFAULT_USER_WALL", "heynemann")
+
+providers_classes = locals()
+
+class Provider(models.Model):
+    user = models.ForeignKey(User, related_name='providers')
+    provider_name = models.CharField(max_length=100)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+    def is_expired(self):
+        return datetime.now() > self.update_at
+
+    def mark_as_updated(self):
+        self.update_at = datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL)
+
+def create_provider(provider_type):
+    def _create_provider(sender, instance, created, **kwargs):
+        import pdb; pdb.set_trace()
+        if created and provider_type.lower() == instance.provider.lower():
+            Provider.objects.create(user=instance.user, provider_name=provider_type,
+                    update_at=datetime.now() + timedelta(days=UPDATE_ALBUMS_DAYS_INTERVAL))
+        return True
+    return _create_provider
+
+facebook_post_save = create_provider("Facebook")
+google_post_save = create_provider("Google")
+
+post_save.connect(facebook_post_save, sender=UserSocialAuth)
+post_save.connect(google_post_save, sender=UserSocialAuth)
+
+class ProvidersHelper(object):
+    def get_username_and_providers(self, username):
+        try:
+            user = User.objects.get(username=username)
+            username = user.username
+            providers = user.providers.all()
+        except User.DoesNotExist:
+            albums = Album.objects.filter(username=username)
+            if not albums and DEFAULT_USER_WALL == username:
+                providers = [Provider(provider_name='Google', update_at=datetime.now() - timedelta(days=1))]
+            else:
+                providers = []
+        return username, providers
+
+class AlbumManager(models.Manager, ProvidersHelper):
+    def load(self, username, force_update=False):
+        username, providers = self.get_username_and_providers(username)
         albums = Album.objects.filter(username=username)
-        if not albums:
+        if not force_update:
+            providers = filter(lambda p: p.is_expired(), providers)
+        if not albums or force_update or providers:
             albums = []
-            provider = GoogleImageProvider(username)
-            for album_base in provider.load_albums():
-                album = Album()
-                album.username = username
-                album.identifier = album_base.identifier
-                album.url = album_base.url
-                album.title = album_base.title
-                album.save()
-                albums.append(album)
+            for provider in providers:
+                remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
+                for album_base in remote_provider.load_albums():
+                    album, created = Album.objects.get_or_create(identifier=album_base.identifier, defaults={
+                        'username': username,
+                        'url': album_base.url,
+                        'title': album_base.title,
+                    })
+                    albums.append(album)
+                provider.mark_as_updated()
         return albums
 
 class Album(models.Model):
@@ -35,23 +93,27 @@ class AlbumProxy(Album):
     class Meta:
         proxy = True
 
-class PhotoManager(models.Manager):
+class PhotoManager(models.Manager, ProvidersHelper):
 
-    def load(self, album):
+    def load(self, album, force_update=False):
+        username, providers = self.get_username_and_providers(album.username)
         photos = Photo.objects.filter(album=album)
-        if not photos:
+        if not force_update:
+            providers = filter(lambda p: p.is_expired(), providers)
+        if not photos or force_update or providers:
             photos = []
-            provider = GoogleImageProvider(album.username)
-            for photo_base in provider.load_photos(album):
-                photo = Photo()
-                photo.title = photo_base.title
-                photo.thumbnail = photo_base.thumbnail
-                photo.width = photo_base.width
-                photo.height = photo_base.height
-                photo.url = photo_base.url
-                photo.album = album
-                photo.save()
-                photos.append(photo)
+            for provider in providers:
+                remote_provider = providers_classes['%sImageProvider' % provider.provider_name](username)
+                for photo_base in remote_provider.load_photos(album):
+                    photo, created = Photo.objects.get_or_create(url=photo_base.url, defaults={
+                        'title': photo_base.title,
+                        'width': photo_base.width,
+                        'height': photo_base.height,
+                        'thumbnail': photo_base.thumbnail,
+                        'album': album,
+                    })
+                    photos.append(photo)
+                provider.mark_as_updated()
         return photos 
 
 

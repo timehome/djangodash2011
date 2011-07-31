@@ -5,6 +5,7 @@ import re
 import random
 from os.path import join
 
+from social_auth.models import UserSocialAuth
 from facebook import GraphAPI
 
 from myimgat.providers.base import ImageProvider, Album, Photo
@@ -12,10 +13,14 @@ from myimgat.providers.base import ImageProvider, Album, Photo
 def format_url(url):
     return url.replace('http://', '').replace('https://', '')
 
-class FacebookProvider(ImageProvider):
-    def __init__(self, token):
-        super(FacebookProvider, self).__init__()
+class FacebookImageProvider(ImageProvider):
+    def __init__(self, username, token=None):
+        super(FacebookImageProvider, self).__init__()
+        self.username = username
         self.token = token
+        if not self.token:
+            user_auth = UserSocialAuth.objects.get(user__username=self.username)
+            self.token = user_auth.extra_data['access_token']
 
     def load_albums(self):
         albums = []
