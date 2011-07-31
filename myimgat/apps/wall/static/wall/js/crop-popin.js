@@ -41,7 +41,7 @@
                 self.embedTitle.set('text', self.image.title);
                 self.embedComments.set('text', shareUrl);
                 self.socials.empty();
-                self.socials.set('html', '<a target="_blank" href="http://twitter.com/share?url=' + shareUrl + '&via=myimgat&text=' + self.image.title + '" class="twitter-share-button">tweet this image</a>');
+                self.socials.set('html', '<a target="_blank" title="tweet this image" href="http://twitter.com/share?url=' + shareUrl + '&via=myimgat&text=' + self.image.title + '" class="twitter-share-button"><img src="/static/wall/img/tweetn.png" alt="tweet this image" /></a>');
                 self.shareArea.fade('in');
             }).post(data);
         },
