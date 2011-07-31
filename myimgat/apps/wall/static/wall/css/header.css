@@ -34,6 +34,11 @@ header h1:hover {
         0 0 5px #fff;
 }
 
+header h1 a{
+    color: #6b21a9;
+    text-decoration: none;
+}
+
 nav {
     overflow: hidden;
     float: left;
