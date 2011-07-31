@@ -4,8 +4,8 @@
 from django.conf.urls.defaults import patterns, url
 from django.views.generic.list_detail import object_detail
 
-from wall.views import index, albums, save_cropped_photo
-from wall.models import CroppedPhoto, Photo
+from wall.views import index, albums, save_cropped_photo, shortened_url
+from wall.models import Photo
 
 urlpatterns = patterns('',
 
@@ -13,11 +13,7 @@ urlpatterns = patterns('',
 
     url('^api/shorten/?$', save_cropped_photo),
     url('^api/(?P<username>[\w._-]+).(?P<extension>(json|jsonp))$', albums),
-
-    url('^(?P<object_id>\d+)[.](?:jpe?g|gif|png)$', object_detail, {
-            'queryset': CroppedPhoto.objects.all(),
-            'template_object_name': 'photo',
-        }, name="cropped_photo_url"),
+    url('^(?P<image_hash>.+?)[.](?:jpe?g|gif|png|JPE?G|GIF|PNG)$', shortened_url),
 
     url('^(?P<username>[\w._-]+)$', index),
 

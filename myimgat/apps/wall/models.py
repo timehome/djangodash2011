@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import logging
 from datetime import datetime, timedelta
+from os.path import splitext
+from hashlib import md5
 
 from django.db import models
 from django.conf import settings
@@ -139,7 +141,11 @@ class CroppedPhoto(models.Model):
     original_photo = models.ForeignKey(Photo, related_name='crops')
     user = models.ForeignKey(User, blank=True, null=True, related_name='cropped_photos')
     url = models.CharField(max_length=500, db_index=True)
+    hash = models.CharField(max_length=200, null=True, db_index=True)
+
+    def set_hash(self):
+        self.hash = md5(self.url).hexdigest()
 
     def get_absolute_url(self):
-        return reverse("cropped_photo_url", kwargs={'object_id': self.id})
+        return "%s.%s" % (self.hash, splitext(self.url)[-1].lstrip('.'))
 

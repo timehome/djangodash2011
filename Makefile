@@ -35,4 +35,5 @@ test:
 jstest:
 	@jasmine-splinter `pwd`/jstests/index.html
 
-
+update_schema:
+	@cd myimgat/ && python manage.py schemamigration wall --auto

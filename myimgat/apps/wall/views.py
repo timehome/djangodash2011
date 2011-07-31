@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from json import dumps
+from os.path import join
 
 from django.conf import settings
 from django.shortcuts import render
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 
 from providers.base import format_url
 
@@ -41,6 +42,7 @@ def albums(request, username=None, extension="json"):
         }
         for photo in PhotoProxy.objects.load(album):
             album_data['photos'].append({
+                'id': photo.id,
                 'url': photo.url,
                 'title': photo.title,
                 'thumbnail': photo.thumbnail,
@@ -59,9 +61,9 @@ def albums(request, username=None, extension="json"):
         raise Http404
 
 @load_username
-def save_cropped_photo(request):
+def save_cropped_photo(request, username=None):
     identifier = request.POST['id']
-    photo = Photo.objects.get(int(identifier))
+    photo = Photo.objects.get(id=int(identifier))
 
     left = request.POST['left']
     top = request.POST['top']
@@ -81,4 +83,14 @@ def save_cropped_photo(request):
         url=url
     )
 
-    return cropped.get_absolute_url()
+    cropped.set_hash()
+    cropped.save()
+
+    return HttpResponse(request.build_absolute_uri('../' + cropped.get_absolute_url()))
+
+def shortened_url(request, image_hash):
+    obj = CroppedPhoto.objects.get(hash=image_hash)
+    if not obj:
+        raise Http404()
+    return HttpResponsePermanentRedirect(join(settings.THUMBOR_SERVER.rstrip('/'), obj.url.lstrip('/')))
+

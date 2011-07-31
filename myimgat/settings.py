@@ -153,7 +153,7 @@ INSTALLED_APPS = (
 
 # django-shorturls app settings
 SHORTEN_MODELS = {
-    'P': 'wall.photo',
+    'P': 'wall.cropped_photo',
 }
 # end of django-shorturl app settings
 

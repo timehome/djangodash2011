@@ -10,6 +10,7 @@
         });
         cropPopin.addEvent('onCropActive', function(image){
             this.element.getElement('h2').set('text', image.title);
+            cropPopin.image = image;
             var photoContainer = this.element.getElement('.photo');
             var photo = new Element('img', {
                 events: {

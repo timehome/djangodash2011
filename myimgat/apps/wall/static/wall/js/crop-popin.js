@@ -24,9 +24,10 @@
         share: function(e) {
             e.preventDefault();
             var data = Object.clone(this.shareButton.retrieve('crop-info'));
+            data["id"] = this.image.id;
             data[this.token.get('name')] = this.token.get('value');
-            this.request.addEvent('success', function() {
-                console.log('sucesso');
+            this.request.addEvent('success', function(url) {
+                console.log('url');
             }).post(data);
         },
 

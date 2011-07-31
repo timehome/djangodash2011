@@ -8,7 +8,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
-    url(r's/', include('shorturls.urls')),
     url(r'^favicon.ico$', redirect_to, {'url': '%sfavicon.ico' % settings.STATIC_URL}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {"next_page": "/"}, name="logout"),
     url(r'^privacy-policy', redirect_to, {'url': '/'}),
