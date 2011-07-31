@@ -15,8 +15,8 @@
                             initialCrop: {
                                 top: 0,
                                 left: 0,
-                                width: size.x - 10,
-                                height: size.y - 10
+                                width: size.x - 2,
+                                height: size.y - 2 
                             },
                             min: {width: 50, height: 50},
                             maskColor: '#ddd',
