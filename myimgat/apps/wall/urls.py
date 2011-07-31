@@ -5,7 +5,7 @@ from django.conf.urls.defaults import patterns, url
 from django.views.generic.list_detail import object_detail
 
 from wall.views import index, albums, save_cropped_photo, shortened_url
-from wall.models import Photo
+from wall.models import Photo, CroppedPhoto
 
 urlpatterns = patterns('',
 
@@ -19,6 +19,11 @@ urlpatterns = patterns('',
 
     url('^photo/(?P<object_id>\d+)$', object_detail, {
             'queryset': Photo.objects.all(),
+            'template_object_name': 'photo',
+        }, name="photo_url"),
+
+    url('^shared_photo/(?P<object_id>\d+)$', object_detail, {
+            'queryset': CroppedPhoto.objects.all(),
             'template_object_name': 'photo',
         }, name="photo_url"),
 
