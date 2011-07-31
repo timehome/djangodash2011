@@ -10,7 +10,7 @@
 {% block body_class %}image-page{% endblock %}
 
 {% block open_graph %}
-<meta property="og:title" content="{{ photo.title }} at MyImg.at"/>
+<meta property="og:title" content="{{ photo.original_photo.title }} at MyImg.at"/>
 <meta property="og:type" content="article:activity"/>
 <meta property="og:url" content="http://myimg.at/shared_photo/{{ photo.id }}"/>
 <meta property="og:image" content="{% thumbor_url_unsafe photo.url "50x50" %}"/>
