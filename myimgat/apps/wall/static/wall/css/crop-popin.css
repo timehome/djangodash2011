@@ -3,9 +3,9 @@
     z-index: 101;
     top: 100%;
     left: 50%;
-    width: 640px;
+    width: 634px;
     height: 800px;
-    margin-left: -320px;
+    margin-left: -317px;
     opacity: 0;
 
     -webkit-transition: all 600ms ease-in-out;
@@ -17,10 +17,46 @@
 }
 
 .crop-popin > div {
-    padding: 20px;
+    padding: 16px;
 }
 
 .crop-popin .crop h2 {
-    padding-bottom: 16px;
+    padding-bottom: 12px;
 }
+
+.crop-popin .crop .photo {
+    margin-bottom: 16px;
+}
+
+.crop-popin .crop .share-crop {
+    display: block;
+    font-size: 26px;
+    border-top: 2px solid #ab17a4;
+    border-bottom: 2px solid #481c46;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 0 -1px #222;
+
+    background: #8f1c93;
+    background: -moz-linear-gradient(top, #8f1c93 0%, #541051 100%);
+    background: -webkit-linear-gradient(top, #8f1c93 0%,#541051 100%);
+    background: -o-linear-gradient(top, #8f1c93 0%,#541051 100%);
+    background: -ms-linear-gradient(top, #8f1c93 0%,#541051 100%);
+    background: linear-gradient(top, #8f1c93 0%,#541051 100%);
+}
+
+.crop-popin .crop .share-crop:hover {
+    background: #8f1c93;
+}
+
+.crop-popin .crop .share-crop:active {
+    border-top: 2px solid #481c46;
+    border-bottom: 2px solid #ab17a4;
+}
+
+
+
 

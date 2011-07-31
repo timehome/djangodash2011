@@ -3,7 +3,7 @@
     var Overlay = global.Overlay = new Class({
         Implements: [Events, Options],
 
-        initialize: function(element, options) {
+        initialize: function(options) {
             this.setOptions(options);
             this.create();
         },
@@ -27,17 +27,17 @@
         },
 
         block: function() {
-            this.block = true;
+            this._block = true;
             return this;
         },
 
         unblock: function() {
-            this.block = false;
+            this._block = false;
             return this;
         },
 
         onClose: function() {
-            if (this.block) return;
+            if (this._block) return;
             this.hide();
             return this.fireEvent('close');
         }

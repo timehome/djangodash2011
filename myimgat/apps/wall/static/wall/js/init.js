@@ -3,7 +3,11 @@
     var headerElement = $('header');
 
     cropPopin: {
-        var cropPopin = new CropPopin('crop-popin');
+        var cropPopin = new CropPopin('crop-popin', {
+            onHide: function(){
+                overlay.hide();
+            }
+        });
         cropPopin.addEvent('onCropActive', function(image){
             this.element.getElement('h2').set('text', image.title);
             var photoContainer = this.element.getElement('.photo');
@@ -12,11 +16,21 @@
                     load: function(){
                         var size = this.getSize();
                         new MooCrop(this, {
+                            initialCrop: {
+                                top: 0,
+                                left: 0,
+                                width: size.x - 2,
+                                height: size.y - 2 
+                            },
                             min: {width: 50, height: 50},
                             maskColor: '#ddd',
+                            maskOpacity: 0.2,
                             constrainRatio: false,
                             handleColor: '#ccc',
-                            cropBorder: 'dashed 1px #000'
+                            cropBorder: 'dashed 1px #000',
+                            onComplete: function(){
+                                //console.log(this, arguments);
+                            }
                         });
                     }
                 }
@@ -74,12 +88,12 @@
                                 }.bind(placeholder),
 
                                 'error': function(){
-                                    this.grab(document.createTextNode(':( was not possible to load this image'));
                                     this.addClass('error');
                                 }.bind(placeholder),
 
                                 'dblclick': function(image){
                                     this.show('crop').fireEvent('cropActive', [image]);
+                                    overlay.show();
                                 }.bind(cropPopin, image)
                             }
                         });
@@ -98,7 +112,11 @@
     request.get();
 
     overlay: {
-        var overlay = new Overlay();
+        var overlay = new Overlay({
+            onClose: function(){
+                cropPopin.hide();
+            }
+        });
     }
 
     popin: {
