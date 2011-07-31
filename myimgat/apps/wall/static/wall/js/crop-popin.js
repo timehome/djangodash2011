@@ -27,10 +27,12 @@
             this.socials = this.element.getElement('div.socials');
             this.cropContainer = this.element.getElement('div.crop-image-container');
             this.preview = this.element.getElement('div.preview');
+            this.cropAgainButton = this.element.getElement('a.crop-again');
         },
 
         bindEvents: function() {
             this.shareButton.addEvent('click', this.share.bind(this));
+            this.cropAgainButton.addEvent('click', this.cropAgain.bind(this));
         },
 
         share: function(e) {
@@ -42,7 +44,9 @@
             this.request.addEvent('success', function(url) {
                 var shareUrl = 'http://myimg.at/shared_photo/' + self.image.id;
                 new Element('img', {src: url}).inject(self.preview.empty());
+
                 self.cropContainer.morph({height: 0});
+
                 self.croppedLink.set('href', url);
                 self.croppedLink.set('text', self.image.title);
                 self.embedURL.set('text', url);
@@ -59,6 +63,12 @@
                 gapi.plusone.go();
                 self.shareArea.fade('in');
             }).post(data);
+        },
+
+        cropAgain: function() {
+            this.cropContainer.setStyle('height', 'auto');
+            this.preview.empty();
+            this.shareArea.fade('hide');
         },
 
         show: function(tab) {

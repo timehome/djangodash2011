@@ -104,6 +104,10 @@ class PhotoManager(models.Manager, ProvidersHelper):
         photos = Photo.objects.filter(album=album)
         if not force_update:
             providers = filter(lambda p: p.is_expired(), providers)
+
+        if not providers and not photos:
+            providers = [Provider(provider_name='Google')]
+
         if not photos or force_update or providers:
             photos = []
             for provider in providers:
