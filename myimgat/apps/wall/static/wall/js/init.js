@@ -68,6 +68,7 @@
             var wall = new Wall("wall", {
                 draggable: true,
                 inertia: true,
+                mousewheel: true,
                 width: 128,
                 height: 128,
                 rangex: [-rangeSize, rangeSize],
