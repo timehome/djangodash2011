@@ -85,7 +85,8 @@ var Wall = new Class({
         showDuration     : 3000,              // Durata visualizzazione Slideshow
         preload          : false,             // Precarica contenuto
         callOnUpdate     : Function,          // Azione on drag/complete
-        callOnChange     : Function           // Azione scatenata quando viene impostato id elemento attivo
+        callOnChange     : Function,          // Azione scatenata quando viene impostato id elemento attivo
+        mousewheel       : false              // Allow moving the wall using the mouse wheel (useful with 2d wheels)
     },
 
     initialize : function(id, options) {
@@ -146,7 +147,45 @@ var Wall = new Class({
             // Reset Movement
             this.moved = 0;
         }.bind( this ))
-        
+
+        if( this.options.mousewheel == true ){
+            var eventHandler = function(e) {
+                var realEvent = e.event || e;
+                var deltaX = 0, deltaY = e.wheel;
+                if( realEvent.axis !== undefined ){
+                    if(realEvent.axis == realEvent.HORIZONTAL_AXIS) {
+                        deltaX = -(realEvent.detail / 60);
+                        deltaY = 0;
+                    } else {
+                        deltaX = 0;
+                        deltaY = -(realEvent.detail / 60);
+                    }
+                } else if( realEvent.wheelDeltaX !== undefined ){
+                    deltaX = realEvent.wheelDeltaX / 120;
+                    deltaY = realEvent.wheelDeltaY / 120;
+                }
+                var xSpeed = deltaX * 13,
+                    ySpeed = deltaY * 13,
+                    factor = this.options.invert ? 1 : -1,
+                    finalX = this.wall.getStyle("left").toInt() + xSpeed * factor,
+                    finalY = this.wall.getStyle("top").toInt() + ySpeed * factor;
+
+                if( finalX < 0) this.wall.setStyle("left", Math.max(this.minx, finalX));
+                if( finalY < 0) this.wall.setStyle("top",  Math.max(this.miny, finalY));
+                if( finalX > 0) this.wall.setStyle("left", Math.min(this.maxx, finalX));
+                if( finalY > 0) this.wall.setStyle("top",  Math.min(this.maxy, finalY));
+
+                this.options.callOnUpdate(this.updateWall());
+                e.preventDefault();
+                e.stopPropagation();
+            }.bind( this );
+            if(Browser.firefox) {
+                this.wall.addEventListener('MozMousePixelScroll', eventHandler, true);
+            } else {
+                $(this.__target).addEvent('mousewheel', eventHandler);
+            }
+        }
+
         // Definisce oggetto draggabile
         if( this.options.draggable == true ){
             this.wallDrag = $(this.__target).makeDraggable({
